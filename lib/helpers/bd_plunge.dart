@@ -111,8 +111,8 @@ class BdPlunge {
     if (dbAlb != null) {
       _version = await dbAlb.getVersion();
       print("Valor da versão atual do BD: $_version");
-      if(_version < 9 ){
-        dbAlb = await updateDb(dbAlb, _version, 9);
+      if(_version < 2 ){
+        dbAlb = await updateDb(dbAlb, _version, 2);
         return dbAlb;
       }else{
         return dbAlb;
@@ -129,7 +129,7 @@ class BdPlunge {
 
     List<String> listQueries = formQueries();
 
-    return await openDatabase(path, version: 8,
+    return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerVersion) async {
           for (String query in listQueries) {
             await db.execute(query);
