@@ -20,6 +20,7 @@ class _PlacePesqTodoDepWidgetState extends State<PlacePesqTodoDepWidget> {
   // ignore: missing_return
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(
@@ -61,15 +62,19 @@ class _PlacePesqTodoDepWidgetState extends State<PlacePesqTodoDepWidget> {
               ),
               SizedBox(
                 height: 44.0,
-                child: RaisedButton(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF004a92),
+                    onPrimary: Colors.white,
+                    elevation: 30.0,
+                  ),
                   child: Text(
                     "Pesquisar",
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  color: Color(0xFF004a92),
                   onPressed: (){
                     if(_formKey.currentState.validate()){
                       //acionar a pag com navigator enviando as variaveis

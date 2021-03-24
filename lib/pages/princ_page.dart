@@ -1,15 +1,11 @@
 import 'package:alba_app/helpers/usuario_helper.dart';
-import 'package:alba_app/pages/albavox_page.dart';
 import 'package:alba_app/pages/dep_page.dart';
 import 'package:alba_app/pages/home_page.dart';
 import 'package:alba_app/pages/mais_page.dart';
-import 'package:alba_app/pages/partidos_page.dart';
 import 'package:alba_app/pages/tel_page.dart';
-import 'package:alba_app/pages/tvalba_page.dart';
 import 'package:alba_app/utils/news_api.dart';
 import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PrincPage extends StatefulWidget {
   PrincPage();
@@ -27,7 +23,6 @@ class _PrincPageState extends State<PrincPage> {
   void initState()  {
     // TODO: implement initState
     super.initState();
-
     news.loadNews().then((value){
       //print("Resultado da classe News: $value");
     });
@@ -36,17 +31,15 @@ class _PrincPageState extends State<PrincPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF004a92),
           centerTitle: true,
           title: Image.asset("assets/images/marca_mobi.png",
-            width: 100.0,),
-          //Text(
-          //definirTitulo(selectedIndex)
-          //),
-          //leading: Image.asset("assets/images/ic_marca_round.png"),
+            width: 100.0,
+          ),
         ),
         drawer: CustomDrawer(),
         body: Container(
@@ -102,31 +95,6 @@ class _PrincPageState extends State<PrincPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => MaisPage()));
         break;
-      case 4:
-        _launchURL("http://egbanet.egba.ba.gov.br/alba");
-        break;
-      case 5:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlacePartidosWidget()));
-        break;
-      case 6:
-      //_launchURL("http://www.al.ba.gov.br/midia-center/tvalba");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlaceTVAlbaWidget()));
-        break;
-      case 7:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlaceAlbavoxWidget()));
-        break;
-    }
-  }
-
-  _launchURL(String urlNew) async {
-    var url = urlNew;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
     }
   }
 

@@ -1,6 +1,5 @@
 import 'package:alba_app/helpers/usuario_helper.dart';
 import 'package:alba_app/models/usuario_model.dart';
-import 'package:alba_app/pages/home_page.dart';
 import 'package:alba_app/pages/princ_page.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -35,6 +34,7 @@ class _PlaceCadastroWidgetState extends State<PlaceCadastroWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         key: _scaffoldKey,
@@ -82,15 +82,18 @@ class _PlaceCadastroWidgetState extends State<PlaceCadastroWidget> {
                     ),
                     SizedBox(
                       height: 44.0,
-                      child: RaisedButton(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color(0xFF004a92),
+                          onPrimary: Colors.white,
+                          elevation: 30.0,
+                        ),
                         child: Text(
                           "Informar",
                           style: TextStyle(
                             fontSize: 18.0,
-                            color: Colors.white,
                           ),
                         ),
-                        color: Color(0xFF004a92),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             Map<String, dynamic> userData = {

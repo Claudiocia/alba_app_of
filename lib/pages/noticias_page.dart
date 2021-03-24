@@ -44,11 +44,12 @@ class PlaceNoticiaWidgetState extends State<PlaceNoticiaWidget> {
           return ListTile(
             title: Text(
               listNotis[index].dataNoticia,
-              style: TextStyle(fontSize: 16, color: Colors.black87),
+              style: TextStyle(fontFamily: 'Dosis', fontSize: 16, color: Colors.black87),
             ),
             subtitle: Text(
               listNotis[index].titleNoticia,
               style: TextStyle(
+                fontFamily: 'Dosis',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -62,32 +63,33 @@ class PlaceNoticiaWidgetState extends State<PlaceNoticiaWidget> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text("Qual o seu desejo?"),
+                    title: Text("Qual o seu desejo?", style: TextStyle(fontFamily: 'Dosis'),),
                     content: Text(
                       listNotis[index].titleNoticia,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontFamily: 'Dosis', fontWeight: FontWeight.bold),
                     ),
                     actions: <Widget>[
-                      FlatButton(
+                      TextButton(
                         onPressed: (){
                           _launchURL(listNotis[index].linkNoticia);
+
                           Navigator.of(context).pop(true);
                         },
-                        child: Text("Ler a íntegra da noticia!"),
+                        child: Text("Ler a íntegra da noticia!", style: TextStyle(fontFamily: 'Dosis'),),
                       ),
-                      FlatButton(
+                      TextButton(
                         onPressed: (){
                           _shareLink(listNotis[index].linkNoticia);
                           Navigator.of(context).pop(true);
                         },
-                        child: Text("Compartilhar"),
+                        child: Text("Compartilhar", style: TextStyle(fontFamily: 'Dosis'),),
                       ),
-                      FlatButton(
+                      TextButton(
                           onPressed: (){
                             Navigator.of(context).pop(true);
                           },
 
-                          child: Text('FECHAR'))
+                          child: Text('FECHAR', style: TextStyle(fontFamily: 'Dosis'),))
                     ],
                   ));
             },
@@ -106,7 +108,14 @@ class PlaceNoticiaWidgetState extends State<PlaceNoticiaWidget> {
   }
 
   _shareLink(String texto) async {
-    await Share.share(texto);
+    //var url = texto;
+
+    String text1 = texto.substring(0, 4);
+    String text2 = texto.substring(5);
+    String text = text1+"s:"+text2;
+    print("Texto: $texto");
+    print("Text: $text");
+    await Share.share(text);
   }
 
 }

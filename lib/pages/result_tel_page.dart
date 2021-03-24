@@ -18,7 +18,7 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
   bool isLoading = false;
   SetorModel setor = SetorModel();
   SetorHelper helperSetor = SetorHelper();
-  List<SetorModel> listSetors = List();
+  List<SetorModel> listSetors = List.empty();
   UtilidadeGeral utils = UtilidadeGeral();
   String pesq;
 
@@ -52,6 +52,7 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(
@@ -199,16 +200,16 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
                                 "\nTel.: (071)" +
                                 listSetors[index].telSetor),
                             actions: <Widget>[
-                              FlatButton(
+                              TextButton(
                                   onPressed: null,
                                   child: Text('Enviar email')),
-                              FlatButton(
+                              TextButton(
                                   onPressed: () {
                                     _makePhoneCall("071" + (listSetors[index].telSetor).substring(0, 9));
                                     Navigator.of(context).pop(true);
                                   },
                                   child: Text('LIGAR')),
-                              FlatButton(
+                              TextButton(
                                   onPressed: () => Navigator.of(context).pop(
                                       true),
                                   child: Text('FECHAR'))
@@ -227,14 +228,14 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
                                     "\nTel.: (071)" +
                                     listSetors[index].telSetor),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  TextButton(
                                       onPressed: () {
                                         _makeEmailCall(listSetors[index]
                                             .emailSetor);
                                         Navigator.of(context).pop(true);
                                       },
                                       child: Text('Enviar email')),
-                                  FlatButton(
+                                 TextButton(
                                       onPressed: () {
                                         _makePhoneCall("071" +
                                             (listSetors[index].telSetor).substring(
@@ -242,7 +243,7 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
                                         Navigator.of(context).pop(true);
                                       },
                                       child: Text('LIGAR')),
-                                  FlatButton(
+                                  TextButton(
                                       onPressed: () =>
                                           Navigator.of(context).pop(
                                               true),
@@ -281,7 +282,7 @@ class _PlaceResultPesqTelWidgetState extends State<PlaceResultPesqTelWidget> {
   }
 
   _initialArea(String nome) {
-    List<String> list = List();
+    List<String> list = List.empty();
     String x, y, z, sig;
 
     list = nome.split(" ");

@@ -41,6 +41,7 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
   Widget build(BuildContext context) {
     if(filtro == 0) {
       return MaterialApp(
+        theme: ThemeData(fontFamily: 'Dosis'),
         title: "ALBA APP",
         home: Scaffold(
           appBar: AppBar(
@@ -143,6 +144,7 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
       );
     }else if(filtro == 1){
       return MaterialApp(
+        theme: ThemeData(fontFamily: 'Dosis'),
         title: "ALBA APP",
         home: Scaffold(
           appBar: AppBar(
@@ -252,15 +254,19 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                 ),
                 SizedBox(
                   height: 44.0,
-                  child: RaisedButton(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF004a92),
+                      onPrimary: Colors.white,
+                      elevation: 30.0,
+                    ),
                     child: Text(
                       "Pesquisar",
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    color: Color(0xFF004a92),
                     onPressed: (){
                       if(filtro != 1){
                         //mostrar um snack com mensagem de erro
@@ -289,6 +295,7 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
       );
     }else if(filtro == 2){
       return MaterialApp(
+        theme: ThemeData(fontFamily: 'Dosis'),
         title: "ALBA APP",
         home: Scaffold(
           appBar: AppBar(
@@ -420,15 +427,19 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                 ),
                 SizedBox(
                   height: 44.0,
-                  child: RaisedButton(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF004a92),
+                      onPrimary: Colors.white,
+                      elevation: 30.0,
+                    ),
                     child: Text(
                       "Pesquisar",
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    color: Color(0xFF004a92),
                     onPressed: (){
                       if(filtro != 2){
                         //mostrar um snack com mensagem de erro
@@ -454,6 +465,7 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
       );
     }else if (filtro == 3){
       return MaterialApp(
+        theme: ThemeData(fontFamily: 'Dosis'),
         title: "ALBA APP",
         home: Scaffold(
           appBar: AppBar(
@@ -586,15 +598,19 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                 ),
                 SizedBox(
                   height: 44.0,
-                  child: RaisedButton(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF004a92),
+                      onPrimary: Colors.white,
+                      elevation: 30.0,
+                    ),
                     child: Text(
                       "Pesquisar",
                       style: TextStyle(
                         fontSize: 18.0,
-                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    color: Color(0xFF004a92),
                     onPressed: (){
                       if(filtro != 3){
                         //mostrar um snack com mensagem de erro

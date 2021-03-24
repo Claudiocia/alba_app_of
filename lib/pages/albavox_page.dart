@@ -11,6 +11,7 @@ class _PlaceAlbavoxWidgetState extends State<PlaceAlbavoxWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(
@@ -31,7 +32,11 @@ class _PlaceAlbavoxWidgetState extends State<PlaceAlbavoxWidget> {
                   Text("Cheguei na página AlbaVox"),
                 ],
               ),
-              RaisedButton(
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blueAccent,
+                  onPrimary: Colors.white,
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },

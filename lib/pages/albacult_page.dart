@@ -33,6 +33,7 @@ class _PlaceAlbaCultWidgetState extends State<PlaceAlbaCultWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(
@@ -134,7 +135,7 @@ class _PlaceAlbaCultWidgetState extends State<PlaceAlbaCultWidget> {
                       ),
                     ),
                     actions: <Widget>[
-                      FlatButton(
+                      TextButton(
                           onPressed: () => Navigator.of(context).pop(
                               true),
                           child: Text('FECHAR'))

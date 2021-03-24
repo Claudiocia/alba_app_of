@@ -12,7 +12,7 @@ class PlaceDeputadoWidget extends StatefulWidget {
 class _PlaceDeputadoWidgetState extends State<PlaceDeputadoWidget> {
   DeputadoHelper helperDep = DeputadoHelper();
   DeputadoModel dep = DeputadoModel();
-  List<DeputadoModel> listDeps = List();
+  List<DeputadoModel> listDeps = List.empty();
   String pathDep = "http://www.al.ba.gov.br/deputados/deputado-estadual/";
 
   @override
@@ -47,6 +47,7 @@ class _PlaceDeputadoWidgetState extends State<PlaceDeputadoWidget> {
               "Dep. " + listDeps[index].nomeDep + " ("
                   + listDeps[index].partidoDep + ")",
               style: TextStyle(
+                fontFamily: 'Dosis',
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.start,
@@ -58,6 +59,9 @@ class _PlaceDeputadoWidgetState extends State<PlaceDeputadoWidget> {
                   listDeps[index].emailDep +
                   "\nTel: (71) " +
                   (listDeps[index].telefoneDep).substring(0, 9),
+              style: TextStyle(
+                fontFamily: 'Dosis',
+              ),
             ),
             onTap: () {
               _launchURL(pathDep + listDeps[index].linkDep);

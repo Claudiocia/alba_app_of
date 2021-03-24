@@ -44,6 +44,7 @@ class _PlaceSobreAppWidgetState extends State<PlaceSobreAppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: AppBar(

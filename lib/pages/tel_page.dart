@@ -5,6 +5,7 @@ import 'package:alba_app/pages/noticias_page.dart';
 import 'package:alba_app/pages/pesq_telefones_page.dart';
 import 'package:alba_app/pages/telefones_page.dart';
 import 'package:alba_app/pages/todosdep_page.dart';
+import 'package:alba_app/presentation/custom_icons_icons.dart';
 import 'package:alba_app/splashscreen.dart';
 import 'package:alba_app/utils/news_api.dart';
 import 'package:alba_app/widgets/custom_drawer.dart';
@@ -36,24 +37,6 @@ class _TelPageState extends State<TelPage> {
     });
   }
 
-  definirTitulo(int index){
-    switch (index){
-      case 0:
-        titlePag = _noticia;
-        break;
-      case 1:
-        titlePag = _deputado;
-        break;
-      case 2:
-        titlePag = _telefone;
-        break;
-      case 3:
-        titlePag = _albaPlus;
-        break;
-    }
-    return titlePag;
-  }
-
   @override
   void initState()  {
     // TODO: implement initState
@@ -66,6 +49,7 @@ class _TelPageState extends State<TelPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'Dosis'),
       title: "ALBA APP",
       home: Scaffold(
         appBar: botaoBarra(),
@@ -77,24 +61,25 @@ class _TelPageState extends State<TelPage> {
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.library_books),
+              icon: Icon(CustomIcons.notic),
               label: 'Notícias',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.people),
+              icon: Icon(CustomIcons.dep_par),
               label: 'Deputados',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.contact_phone),
+              icon: Icon(CustomIcons.tel_uteis),
               label: 'Tel Uteis',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
+              icon: Icon(CustomIcons.alba_mais),
               label: 'Mais Alba',
             ),
           ],
           currentIndex: selectedIndex,
           selectedItemColor: Colors.blueAccent, //amber[800],
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
           onTap: onItemTapped,
         ),
       ),
@@ -136,7 +121,7 @@ class _TelPageState extends State<TelPage> {
             width: 100.0,),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.people_outline),
+              icon: Icon(CustomIcons.dep),
               tooltip: "Listar todos dep",
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(

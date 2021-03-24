@@ -1,12 +1,12 @@
 import 'package:alba_app/pages/comissoes_page.dart';
 import 'package:alba_app/pages/partidos_page.dart';
 import 'package:alba_app/pages/pauta_page.dart';
+import 'package:alba_app/pages/radioalba_page.dart';
 import 'package:alba_app/pages/tvalba_page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'albacult_page.dart';
-import 'albavox_page.dart';
 import 'mesadir_page.dart';
 
 class PlaceMaisAlbaWidget extends StatefulWidget {
@@ -21,10 +21,10 @@ class _PlaceMaisAlbaWidgetState extends State<PlaceMaisAlbaWidget> {
     'assets/images/ic_comissoes.png',
     'assets/images/ic_alba_cult.png',
     'assets/images/ic_pauta.png',
+    'assets/images/ic_tvalba.png',
+    'assets/images/ic_radio.png',
     'assets/images/ic_diario_oficial.png',
     'assets/images/ic_partidos.png',
-    //'assets/images/ic_tvalba.png',
-    //'assets/images/ic_albavox.png',
   ];
 
   @override
@@ -67,21 +67,20 @@ class _PlaceMaisAlbaWidgetState extends State<PlaceMaisAlbaWidget> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => PlacePautaWidget()));
         break;
-      case 4:
-        _launchURL("http://egbanet.egba.ba.gov.br/alba");
-        break;
-      case 5:
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlacePartidosWidget()));
-        break;
       case 6:
-      //_launchURL("http://www.al.ba.gov.br/midia-center/tvalba");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlaceTVAlbaWidget()));
+        _launchURL("http://egbanet.egba.ba.gov.br/alba");
         break;
       case 7:
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PlaceAlbavoxWidget()));
+            MaterialPageRoute(builder: (context) => PlacePartidosWidget()));
+        break;
+      case 4:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PlaceTVAlbaWidget()));
+        break;
+      case 5:
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PlaceRadioAlbaWidget()));
         break;
     }
   }

@@ -13,7 +13,7 @@ class PlaceTelefoneWidget extends StatefulWidget {
 class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
   SetorModel setor = SetorModel();
   SetorHelper helperSetor = SetorHelper();
-  List<SetorModel> listSetors = List();
+  List<SetorModel> listSetors = List.empty();
   UtilidadeGeral utils = UtilidadeGeral();
 
   @override
@@ -47,6 +47,7 @@ class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
                 child: Text(
                   _initialArea(listSetors[index].areaSetor),
                   style: TextStyle(
+                    fontFamily: 'Dosis',
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
@@ -55,6 +56,7 @@ class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
               title: Text(
                 listSetors[index].areaSetor,
                 style: TextStyle(
+                  fontFamily: 'Dosis',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -62,32 +64,38 @@ class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
                   "\n" +
                   _testeNome(listSetors[index].respSetor) +
                   "\n" +
-                  listSetors[index].telSetor),
+                  listSetors[index].telSetor,
+                style: TextStyle(fontFamily: 'Dosis'),
+              ),
               onTap: () {
                 if(listSetors[index].emailSetor == "null"){
                   showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text(listSetors[index].nomeSetor),
+                        title: Text(listSetors[index].nomeSetor,
+                        style: TextStyle(fontFamily: 'Dosis'),
+                        ),
                         content: Text(listSetors[index].respSetor +
                             "\nEmail: " +
                             listSetors[index].emailSetor +
                             "\nTel.: (071)" +
-                            listSetors[index].telSetor),
+                            listSetors[index].telSetor,
+                          style: TextStyle(fontFamily: 'Dosis'),
+                        ),
                         actions: <Widget>[
-                          FlatButton(
+                          TextButton(
                               onPressed: null,
-                              child: Text('Enviar email')),
-                          FlatButton(
+                              child: Text('Enviar email', style: TextStyle(fontFamily: 'Dosis'),)),
+                          TextButton(
                               onPressed: () {
                                 _makePhoneCall("071" + (listSetors[index].telSetor).substring(0, 9));
                                 Navigator.of(context).pop(true);
                               },
-                              child: Text('LIGAR')),
-                          FlatButton(
+                              child: Text('LIGAR', style: TextStyle(fontFamily: 'Dosis'),)),
+                          TextButton(
                               onPressed: () => Navigator.of(context).pop(
                                   true),
-                              child: Text('FECHAR'))
+                              child: Text('FECHAR', style: TextStyle(fontFamily: 'Dosis')))
                         ],
                       )
                   );
@@ -96,33 +104,33 @@ class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
                       context: context,
                       builder: (context) =>
                           AlertDialog(
-                            title: Text(listSetors[index].nomeSetor),
+                            title: Text(listSetors[index].nomeSetor, style: TextStyle(fontFamily: 'Dosis')),
                             content: Text(listSetors[index].respSetor +
                                 "\nEmail: " +
                                 listSetors[index].emailSetor +
                                 "\nTel.: (071)" +
-                                listSetors[index].telSetor),
+                                listSetors[index].telSetor, style: TextStyle(fontFamily: 'Dosis')),
                             actions: <Widget>[
-                              FlatButton(
+                              TextButton(
                                   onPressed: () {
                                     _makeEmailCall(listSetors[index]
                                         .emailSetor);
                                     Navigator.of(context).pop(true);
                                   },
-                                  child: Text('Enviar email')),
-                              FlatButton(
+                                  child: Text('Enviar email', style: TextStyle(fontFamily: 'Dosis'))),
+                              TextButton(
                                   onPressed: () {
                                     _makePhoneCall("071" +
                                         (listSetors[index].telSetor).substring(
                                             0, 9));
                                     Navigator.of(context).pop(true);
                                   },
-                                  child: Text('LIGAR')),
-                              FlatButton(
+                                  child: Text('LIGAR', style: TextStyle(fontFamily: 'Dosis'))),
+                              TextButton(
                                   onPressed: () =>
                                       Navigator.of(context).pop(
                                           true),
-                                  child: Text('FECHAR'))
+                                  child: Text('FECHAR', style: TextStyle(fontFamily: 'Dosis')))
                             ],
                           ));
                 }
@@ -155,7 +163,7 @@ class _PlaceTelefoneWidgetState extends State<PlaceTelefoneWidget> {
   }
 
   _initialArea(String nome) {
-    List<String> list = List();
+    List<String> list = List.empty();
     String x, y, z, sig;
 
     list = nome.split(" ");
