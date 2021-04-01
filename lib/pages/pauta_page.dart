@@ -18,7 +18,7 @@ class PlacePautaWidget extends StatefulWidget {
 
 class _PlacePautaWidgetState extends State<PlacePautaWidget> {
   PropositionApi proposiApi = PropositionApi();
-  List<ProposicaoModel> listProposi = List();
+  List<ProposicaoModel> listProposi = [];
   UtilidadeGeral utils = UtilidadeGeral();
   ProposicaoModel proposicao;
   bool isLoading = false;

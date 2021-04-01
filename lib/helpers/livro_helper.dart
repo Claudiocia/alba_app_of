@@ -37,7 +37,7 @@ class LivroHelper {
 
     List listMap = await dbLivro.rawQuery(
         "SELECT * FROM $tabLivros ORDER BY $dataBancoCol DESC");
-    List<LivroModel> listLivos = List();
+    List<LivroModel> listLivos = [];
     for(Map m in listMap){
       listLivos.add(LivroModel.fromMap(m));
     }
@@ -55,7 +55,7 @@ class LivroHelper {
     List listMap = await dbLivro.rawQuery("SELECT $numPagCol FROM $tabLivros");
 
     if(listMap.length > 0){
-      n = listMap.first;
+      n = listMap.length;
     }
     return n;
   }

@@ -1,4 +1,3 @@
-import 'package:alba_app/pages/cadastro_page.dart';
 import 'package:alba_app/pages/dep_page.dart';
 import 'package:alba_app/pages/home_page.dart';
 import 'package:alba_app/pages/mais_page.dart';
@@ -40,6 +39,7 @@ class DrawerTile extends StatelessWidget {
               Text(
                 text,
                 style: TextStyle(
+                  fontFamily: 'Dosis',
                   fontSize: 16.0,
                   color: Colors.black
                 ),

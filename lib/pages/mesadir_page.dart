@@ -11,7 +11,7 @@ class PlaceMesaDirWidget extends StatefulWidget {
 
 class _PlaceMesaDirWidgetState extends State<PlaceMesaDirWidget> {
   MesaDirHelper helperMesa = MesaDirHelper();
-  List<MesaDirModel> listMesa = List();
+  List<MesaDirModel> listMesa = [];
 
   @override
   void initState() {

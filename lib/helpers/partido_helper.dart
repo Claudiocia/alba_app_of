@@ -34,7 +34,7 @@ class PartidoHelper {
   Future<List> getAllPartidos() async {
     Database dbPart = await BdPlunge.instance.dbAlba;
     List listMap = await dbPart.rawQuery("SELECT * FROM $tabPart");
-    List<PartidoModel> listParts = List();
+    List<PartidoModel> listParts = [];
     for(Map m in listMap){
       listParts.add(PartidoModel.fromMap(m));
     }

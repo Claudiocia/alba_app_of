@@ -1,4 +1,4 @@
-import 'package:alba_app/helpers/bd_plunge.dart';
+
 
 class ProposicaoModel {
   String linkProposi;
@@ -40,10 +40,10 @@ class ProposicaoModel {
   @override
   String toString() {
     // TODO: implement toString
-    return "\nLink: ${linkProposi} \nEmenta: ${ementProposi} \nNum.: ${numerProposi} "+
-        "\nAutor: ${autorProposi} \nLocal Atual: ${localProposi} "
-            "\nData de apres.: ${dataProposi} \nData da Ult. Tram: ${aprovProposi} "
-            "\nSitFinal: ${resultProposi}";
+    return "\nLink: $linkProposi \nEmenta: $ementProposi \nNum.: $numerProposi "+
+        "\nAutor: $autorProposi \nLocal Atual: $localProposi "
+            "\nData de apres.: $dataProposi \nData da Ult. Tram: $aprovProposi "
+            "\nSitFinal: $resultProposi";
   }
 
 }

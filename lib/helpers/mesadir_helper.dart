@@ -2,7 +2,6 @@ import 'package:alba_app/models/mesadir_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'bd_plunge.dart';
-import 'deputado_helper.dart';
 
 List<String> colsMesa = [
   mesaIdCol,
@@ -50,11 +49,9 @@ class MesaDirHelper {
 
   Future<List> getAllMesa() async {
     Database dbMesa = await BdPlunge.instance.dbAlba;
-    DeputadoHelper helperDep = DeputadoHelper();
-
 
     List listMap = await dbMesa.rawQuery("SELECT * FROM $tabMesadir");
-    List<MesaDirModel> listMesas = List();
+    List<MesaDirModel> listMesas = [];
     for (Map m in listMap) {
       listMesas.add(MesaDirModel.fromMap(m));
     }

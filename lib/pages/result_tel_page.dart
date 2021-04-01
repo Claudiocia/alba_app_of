@@ -7,6 +7,7 @@ import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class PlaceResultPesqTelWidget extends StatefulWidget {
   String valorPesq;
   PlaceResultPesqTelWidget({this.valorPesq});

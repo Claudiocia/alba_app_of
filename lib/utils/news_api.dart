@@ -8,7 +8,7 @@ class NewsApi {
   NoticiaHelper helperNoti = NoticiaHelper();
 
   Future<List> loadNews() async {
-    List<NoticiaModel> listNews = List();
+    List<NoticiaModel> listNews = [];
 
     //Metodo para buscar as noticias no site da Alba
     final webScraper = WebScraper('http://www.al.ba.gov.br');
@@ -24,7 +24,6 @@ class NewsApi {
       List<Map<String, dynamic>> elements4 =
       webScraper.getElement('div.media-body > p.sub-title-new', ['']);
 
-      //print('Tamanho do mapa ${elements.length}');
 
       for (int i = 0; i < elements.length; i++) {
         NoticiaModel noti = NoticiaModel();
@@ -40,7 +39,7 @@ class NewsApi {
         String datHora =
         (data.toString()).substring(0, (data.toString()).length - 3);
         String res = (elements4[i]['title']).toString();
-        print('TituNot: $tit \nLinkNot: $link \nLinkImg: $img');
+
         noti.titleNoticia = tit;
         noti.dataNoticia = datHora;
         noti.resumoNoticia = res;
@@ -52,7 +51,7 @@ class NewsApi {
             try {
               helperNoti.saveNoticia(noti);
             } catch (e) {
-              //print(e);
+
             }
           }
         });
@@ -60,7 +59,7 @@ class NewsApi {
       }
     }
     helperNoti.deleteNotiPrazo().then((valor) {
-      print("o retorno do delete é: $valor");
+
     });
     return listNews;
   }

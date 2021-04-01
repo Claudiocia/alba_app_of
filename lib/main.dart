@@ -64,9 +64,9 @@ class _MyAppState extends State<MyApp> {
                   value2 = snapshot.data;
                 }
               }
-              print("Print fora do if o valor de Value2 é ${value2.toString()}");
+
               if(value2 == "Carregando"){
-                print("Print no if carregando o valor de Value2 é ${value2.toString()}");
+
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -82,10 +82,11 @@ class _MyAppState extends State<MyApp> {
                   ),
                 );
               }else if (user3 == "Inexiste"){
-                print("Print no else o valor de Value2 é ${value2.toString()}");
+
                 return ScopedModel<UsuarioModel>(
                   model: UsuarioModel(),
                   child: MaterialApp(
+                    theme: ThemeData(fontFamily: 'Dosis'),
                     home: PlaceCadastroWidget(),
                     debugShowCheckedModeBanner: false,
                   ),
@@ -94,6 +95,7 @@ class _MyAppState extends State<MyApp> {
                 return ScopedModel<UsuarioModel>(
                   model: UsuarioModel(),
                   child: MaterialApp(
+                    theme: ThemeData(fontFamily: 'Dosis'),
                     home: PrincPage(),
                     debugShowCheckedModeBanner: false,
                   ),

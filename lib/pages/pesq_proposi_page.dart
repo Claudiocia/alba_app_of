@@ -74,7 +74,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                     title: Text("Proposições antigas"),
                     subtitle: Text("Selecione para antes de 19/01/2021"),
                     onChanged: (val){
-                      print("Radio Tile pressionado $val");
                       setSelectedRadioTile(val);
                     },
                   activeColor: Color(0xFF004a92),
@@ -86,7 +85,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições Novas"),
                   subtitle: Text("Selecione para depois de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -121,8 +119,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                       filtro = FiltroForForm.getFiltros(newValue);
                       _selectedFiltro = newValue;
                       _numeroFormController.clear();
-                      print(_selectedFiltro);
-                      print(filtro.toString());
                     });
                   },
                   items: FiltroForForm.getFiltString()
@@ -177,7 +173,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições antigas"),
                   subtitle: Text("Selecione para antes de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -189,7 +184,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições Novas"),
                   subtitle: Text("Selecione para depois de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -224,8 +218,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                       filtro = FiltroForForm.getFiltros(newValue);
                       _selectedFiltro = newValue;
                       _numeroFormController.clear();
-                      print(_selectedFiltro);
-                      print(filtro.toString());
                     });
                   },
                   items: FiltroForForm.getFiltString()
@@ -244,10 +236,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   decoration: InputDecoration(
                     hintText: "Numero no formato n.nnn/aa ou nnnn/aaaa",
                   ),
-                  validator: (text){
-                    if (text.length < 4)
-                      return "Número inválido!";
-                  },
                 ),
                 SizedBox(
                   height: 16.0,
@@ -274,8 +262,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                         if(_formKey.currentState.validate()){
                           //acionar a pag com navigator enviando as variaveis
                           String textoPesq = _numeroFormController.text;
-                          print("O valor do filtro é ${filtro} e "
-                              "\no valor a ser pesquisado é: ${textoPesq}");
                           Navigator.push(context,
                               MaterialPageRoute(
                                   builder: (context) => PlacePautaWidget(
@@ -328,7 +314,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições antigas"),
                   subtitle: Text("Selecione para antes de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -340,7 +325,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições Novas"),
                   subtitle: Text("Selecione para depois de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -375,8 +359,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                       filtro = FiltroForForm.getFiltros(newValue);
                       _selectedFiltro = newValue;
                       _numeroFormController.clear();
-                      print(_selectedFiltro);
-                      print(filtro.toString());
                     });
                   },
                   items: FiltroForForm.getFiltString()
@@ -411,7 +393,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                     setState(() {
                       tipo = newTipo;
                       _selectedTipo = newTipo;
-                      print(tipo);
                     });
                   },
                   items: TipoForForm.getTipo()
@@ -445,8 +426,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                         //mostrar um snack com mensagem de erro
                       }else{
                         //acionar a pag com navigator enviando as variaveis
-                        print("O valor do filtro é ${filtro} e "
-                            "\no valor a ser pesquisado é: ${tipo}");
                         Navigator.push(context,
                             MaterialPageRoute(
                                 builder: (context) => PlacePautaWidget(
@@ -498,7 +477,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições antigas"),
                   subtitle: Text("Selecione para antes de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -510,7 +488,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                   title: Text("Proposições Novas"),
                   subtitle: Text("Selecione para depois de 19/01/2021"),
                   onChanged: (val){
-                    print("Radio Tile pressionado $val");
                     setSelectedRadioTile(val);
                   },
                   activeColor: Color(0xFF004a92),
@@ -545,8 +522,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                       filtro = FiltroForForm.getFiltros(newValue);
                       _selectedFiltro = newValue;
                       _numeroFormController.clear();
-                      print(_selectedFiltro);
-                      print(filtro.toString());
                     });
                   },
                   items: FiltroForForm.getFiltString()
@@ -582,8 +557,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                     setState(() {
                       autor = AutorForForm.getAutor(newAutor);
                       _selectedAutor = newAutor;
-                      print("O nome do autor é: ${newAutor} "
-                          "e p num de referencia é ${autor.toString()}");
                     });
                   },
                   items: AutorForForm.getAutorString().map<DropdownMenuItem<String>>((String autor){
@@ -616,9 +589,6 @@ class _PlacePesqProposiWidgetState extends State<PlacePesqProposiWidget> {
                         //mostrar um snack com mensagem de erro
                       }else{
                         //acionar a pag com navigator enviando as variaveis
-                        print("O valor do filtro é ${filtro} e "
-                            "\no valor a ser pesquisado é: ${autor} "
-                            "\nO valor do botao radio é ${selectedRadioTile}");
                         String autorPesq = autor.toString();
                         Navigator.push(context,
                             MaterialPageRoute(

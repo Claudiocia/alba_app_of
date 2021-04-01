@@ -26,10 +26,6 @@ class _MaisPageState extends State<MaisPage> {
 
   //Variaves usadas nesta classe
   int selectedIndex = 3;
-  String _noticia = "ALBA - Notícias";
-  String _deputado = "ALBA - Deputados";
-  String _telefone = "ALBA - Telefones";
-  String _albaPlus = "ALBA - Mais Opções";
   String titlePag;
 
 

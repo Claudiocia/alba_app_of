@@ -25,10 +25,6 @@ class _TelPageState extends State<TelPage> {
 
   //Variaves usadas nesta classe
   int selectedIndex = 2;
-  String _noticia = "ALBA - Notícias";
-  String _deputado = "ALBA - Deputados";
-  String _telefone = "ALBA - Telefones";
-  String _albaPlus = "ALBA - Mais Opções";
   String titlePag;
 
   void onItemTapped(int index) {

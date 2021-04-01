@@ -5,8 +5,8 @@ import 'package:web_scraper/web_scraper.dart';
 class PropositionApi {
   PropositionApi();
 
-  final String htmlAlba = "http://www.al.ba.gov.br";
-  List<ProposicaoModel> proposiList = List();
+  final String htmlAlba = "https://www.al.ba.gov.br";
+  List<ProposicaoModel> proposiList = [];
   String porNumero = ""; //filtro 1
   String porTipo = ""; //filtro 2
   String porDep = ""; //filtro 3
@@ -17,9 +17,9 @@ class PropositionApi {
   int banco;
   var pagHtml;
 
+  // ignore: missing_return
   Future<List> loadProposic({int filtro, String valor, int bancoPesq}) async {
     final webScraperLiv = WebScraper(htmlAlba);
-    print("O valor do bancoPesqu é $bancoPesq");
     if(bancoPesq != null){
       banco = bancoPesq;
     }else{
@@ -31,7 +31,6 @@ class PropositionApi {
       case 1:
         valor = valor.replaceAll("/", "%2F");
         porNumero = valor;
-        print("\nO valor já formatado: ${valor}");
         break;
       case 2:
         porTipo = valor;
@@ -64,9 +63,9 @@ class PropositionApi {
         break;
     }
     if(banco == 2){
-      pagHtml = "/atividade-legislativa-nova/proposicoes?numero=${porNumero}&palavra=&tipo=${porTipo}&deputado=${porDep}&exDeputado=&outros=${porExec}&dataInicio=${dataIni}&dataFim=${dataFim}";
+      pagHtml = "/atividade-legislativa-nova/proposicoes?numero=$porNumero&palavra=&tipo=$porTipo&deputado=$porDep&exDeputado=&outros=$porExec&dataInicio=$dataIni&dataFim=$dataFim";
     }else{
-      pagHtml = "/atividade-legislativa/proposicoes?numero=${porNumero}&palavra=&tipo=${porTipo}&deputado=${porDep}&exDeputado=&outros=${porExec}&dataInicio=${dataIni}&dataFim=${dataFim}";
+      pagHtml = "/atividade-legislativa/proposicoes?numero=$porNumero&palavra=&tipo=$porTipo&deputado=$porDep&exDeputado=&outros=$porExec&dataInicio=$dataIni&dataFim=$dataFim";
     }
 
 
@@ -89,7 +88,7 @@ class PropositionApi {
           var numProp = elements1[i]["title"];
           String numerProposi = (numProp.toString()).trim();
           String end = numerProposi.replaceAll("/", "-");
-          link = "${htmlAlba}/atividade-legislativa/proposicao/${end}";
+          link = "$htmlAlba/atividade-legislativa/proposicao/$end";
 
           proposi.linkProposi = link;
           proposi.ementProposi = ement;

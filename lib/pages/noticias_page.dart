@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alba_app/helpers/noticia_helper.dart';
 import 'package:alba_app/models/noticia_model.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ class PlaceNoticiaWidget extends StatefulWidget {
 class PlaceNoticiaWidgetState extends State<PlaceNoticiaWidget> {
   NoticiaHelper helperNoti = NoticiaHelper();
   NoticiaModel noti = NoticiaModel();
-  List<NoticiaModel> listNotis = List();
+  List<NoticiaModel> listNotis = [];
   String path;
 
   @override
@@ -108,14 +110,16 @@ class PlaceNoticiaWidgetState extends State<PlaceNoticiaWidget> {
   }
 
   _shareLink(String texto) async {
-    //var url = texto;
-
-    String text1 = texto.substring(0, 4);
-    String text2 = texto.substring(5);
-    String text = text1+"s:"+text2;
-    print("Texto: $texto");
-    print("Text: $text");
-    await Share.share(text);
+    if(Platform.isIOS){
+      String text1 = texto.substring(0, 4);
+      String text2 = texto.substring(5);
+      String text = text1+"s:"+text2;
+      print("Plataforma IOS o link é: "+ text);
+      await Share.share(text);
+    }else{
+      print("Plataforma Android o link é: "+ texto);
+      await Share.share(texto);
+    }
   }
 
 }

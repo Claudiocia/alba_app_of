@@ -76,7 +76,6 @@ class _PlacePesqTelefonesWidgetState extends State<PlacePesqTelefonesWidget> {
                     if(_formKey.currentState.validate()){
                       //acionar a pag com navigator enviando as variaveis
                       String textoPesq = _numeroFormController.text;
-                      print("O valor a ser pesquisado é: ${textoPesq}");
                       Navigator.push(context,
                           MaterialPageRoute(
                               builder: (context) => PlaceResultPesqTelWidget(

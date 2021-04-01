@@ -58,9 +58,9 @@ class LivroModel {
   @override
   String toString() {
     // TODO: implement toString
-    return "\nLivro(id: $idLivro, \nTit: ${titLivro}, \nLink: ${linkLivro}, \nImg: ${capaLivro}, "
-        "\nEdicao: ${edtLivro}, \nAutor: ${autorLivro}, \nDadosPublic: ${publicLivro}, \nFormato: ${formatLivro}, "
-        "\nResum: ${resumLivro}, \nISBN: ${isbnLivro}, \nFonte: ${fonteLivro}, \nData: ${dataLivro})";
+    return "\nLivro(id: $idLivro, \nTit: $titLivro, \nLink: $linkLivro, \nImg: $capaLivro, "
+        "\nEdicao: $edtLivro, \nAutor: $autorLivro, \nDadosPublic: $publicLivro, \nFormato: $formatLivro, "
+        "\nResum: $resumLivro, \nISBN: $isbnLivro, \nFonte: $fonteLivro, \nData: $dataLivro)";
   }
 
 }

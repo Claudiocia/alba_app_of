@@ -54,7 +54,7 @@ class ComissaoHelper {
   Future<List> getAllComiss() async {
     Database dbComiss = await BdPlunge.instance.dbAlba;
     List listMap = await dbComiss.rawQuery("SELECT * FROM $tabComiss");
-    List<ComissaoModel> listComiss = List();
+    List<ComissaoModel> listComiss = [];
     for(Map m in listMap){
       listComiss.add(ComissaoModel.fromMap(m));
     }

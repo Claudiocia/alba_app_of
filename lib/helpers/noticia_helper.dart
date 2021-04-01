@@ -66,7 +66,7 @@ class NoticiaHelper {
     Database dbNoti = await BdPlunge.instance.dbAlba;
     List listMap = await dbNoti.rawQuery(
         "SELECT * FROM $tabNoticias ORDER BY $notiLinkCol DESC");
-    List<NoticiaModel> listNotis = List();
+    List<NoticiaModel> listNotis = [];
     for(Map m in listMap){
       listNotis.add(NoticiaModel.fromMap(m));
     }

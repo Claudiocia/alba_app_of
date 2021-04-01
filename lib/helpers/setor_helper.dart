@@ -46,7 +46,7 @@ class SetorHelper {
   Future<List> getAllSetors() async {
     Database dbSetor = await BdPlunge.instance.dbAlba;
     List listMap = await dbSetor.rawQuery("SELECT * FROM $tabSetores");
-    List<SetorModel> listSetors = List();
+    List<SetorModel> listSetors = [];
     for(Map m in listMap){
       listSetors.add(SetorModel.fromMap(m));
     }
@@ -57,7 +57,7 @@ class SetorHelper {
     Database dbSetor = await BdPlunge.instance.dbAlba;
     List listMaps = await dbSetor.rawQuery("SELECT * FROM $tabSetores "
         "WHERE $setorTagCol LIKE '%$busca%' ORDER BY $setorIdCol ASC");
-    List<SetorModel> listResultBusca = List();
+    List<SetorModel> listResultBusca = [];
     if(listMaps.length > 0){
       for(Map m in listMaps){
         listResultBusca.add(SetorModel.fromMap(m));

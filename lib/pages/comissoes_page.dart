@@ -11,7 +11,7 @@ class PlaceComissoesWidget extends StatefulWidget {
 
 class _PlaceComissoesWidgetState extends State<PlaceComissoesWidget> {
   ComissaoHelper helperComiss = ComissaoHelper();
-  List<ComissaoModel> listComis = List();
+  List<ComissaoModel> listComis = [];
   String tvNomeComiss, tvPresidComiss, tvViceComiss, tvTituComiss;
   String tvSupleComiss, tvDadosComiss, salaComiss, diaComiss, horaComiss;
 

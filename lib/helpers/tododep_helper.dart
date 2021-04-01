@@ -40,7 +40,7 @@ class TodoDepHelper{
   Future<List> getAllTodosDeps() async {
     Database dbTodoDep = await BdPlunge.instance.dbAlba;
     List listMap = await dbTodoDep.rawQuery("SELECT * FROM $tabTodosDep");
-    List<TodoDepModel> listTodosDeps = List();
+    List<TodoDepModel> listTodosDeps = [];
     for(Map m in listMap){
       listTodosDeps.add(TodoDepModel.fromMap(m));
     }
@@ -51,7 +51,7 @@ class TodoDepHelper{
     Database dbTodoDep = await BdPlunge.instance.dbAlba;
     List listMaps = await dbTodoDep.rawQuery("SELECT * FROM $tabTodosDep "
         "WHERE $tagCol LIKE '%$busca%' ORDER BY $nomeParlaCol ASC");
-    List<TodoDepModel> listResultBusca = List();
+    List<TodoDepModel> listResultBusca = [];
     if(listMaps.length > 0) {
       for(Map m in listMaps){
         listResultBusca.add(TodoDepModel.fromMap(m));

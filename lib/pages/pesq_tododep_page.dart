@@ -1,7 +1,3 @@
-import 'package:alba_app/models/autor_model.dart';
-import 'package:alba_app/models/filtro_model.dart';
-import 'package:alba_app/models/tipo_model.dart';
-import 'package:alba_app/pages/pauta_page.dart';
 import 'package:alba_app/pages/todosdep_page.dart';
 import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +75,6 @@ class _PlacePesqTodoDepWidgetState extends State<PlacePesqTodoDepWidget> {
                     if(_formKey.currentState.validate()){
                       //acionar a pag com navigator enviando as variaveis
                       String textoPesq = _numeroFormController.text;
-                      print("O valor a ser pesquisado é: ${textoPesq}");
                       Navigator.push(context,
                           MaterialPageRoute(
                               builder: (context) => PlaceTodosDepWidget(

@@ -95,6 +95,12 @@ final String linkPaginCol = "linkPagin";
 final String inMandatCol = "inMandat";
 final String tagCol = "tag";
 
+final String tabControle = "tb_controle";
+final String idControleCol = "idControl";
+final String versionAtualCol = "versao_atual";
+final String ultimaVerifcCol = "ultimaVerific";
+final String proximaVerifcCol = "proximaVerific";
+
 class BdPlunge {
   //Aplicação do padrão Singleton na Classe (Para que exista apenas um Banco
 
@@ -110,9 +116,9 @@ class BdPlunge {
   Future<Database> get dbAlba async {
     if (dbAlb != null) {
       _version = await dbAlb.getVersion();
-      print("Valor da versão atual do BD: $_version");
+
       if(_version < 2 ){
-        dbAlb = await updateDb(dbAlb, _version, 2);
+        dbAlb = await updateDb(dbAlb, _version, 3);
         return dbAlb;
       }else{
         return dbAlb;
@@ -129,7 +135,7 @@ class BdPlunge {
 
     List<String> listQueries = formQueries();
 
-    return await openDatabase(path, version: 1,
+    return await openDatabase(path, version: 2,
         onCreate: (Database db, int newerVersion) async {
           for (String query in listQueries) {
             await db.execute(query);
@@ -146,14 +152,14 @@ class BdPlunge {
     await db.execute("DROP TABLE IF EXISTS $tabSetores;");
     await db.execute("DROP TABLE IF EXISTS $tabPart;");
     await db.execute("DROP TABLE IF EXISTS $tabTodosDep;");
+    await db.execute("DROP TABLE IF EXISTS $tabControle;");
 
     for (int i = 0; i < listQueriesAtualiz.length; i++) {
       String queryAtualiz = listQueriesAtualiz[i];
       await db.execute(queryAtualiz);
     }
     await db.setVersion(newVersion);
-    int _version1 = await db.getVersion();
-    print("Valor da versão atualizado do BD: $_version1");
+
     return db;
   }
 
@@ -859,8 +865,16 @@ class BdPlunge {
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
           "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
-          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola Júnior',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola Junior'),"
-          "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fundacaopaulojackson@alba.ba.gov.br',  '3115-2935/3115-5397', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis'),"
+          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola da Cunha',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola cunha'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fpj-dg@alba.ba.gov.br',  '3115-2935', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Secretária da Dir Geral',  'Cheila Braga',  '',  '3115-2935', 'FUNDACAO PAULO JACKSON Cheila Braga Diretoria Geral Secretaria TV ALBA Radio'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretoria Administrativa e Financeira',  'Almir Pereira dos Santos',  'fundacaopaulojackson@alba.ba.gov.br',  '3115-5478', 'FUNDACAO PAULO JACKSON Diretoria Administrativa Financeira Almir Pereira dos Santos TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente Financeiro',  'Tânia Borges',  'fundacaopaujackson@alba.ba.gov.br',  '3115-5569', 'FUNDACAO PAULO JACKSON Gerente Financeiro Tania Borges TV ALBA Radio'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretoria de Programação',  'Bruno Cássio Moraes Leal',  'fpj-dp@alba.ba.gov.br',  '3115-0921', 'FUNDACAO PAULO JACKSON Diretoria Programacao Bruno Cassio Moraes Leal TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente TV ALBA',  'Theodomiro Baptista Neto',  'fpj-gtv@alba.ba.gov.br',  '3115-5398', 'FUNDACAO PAULO JACKSON Gerente Theodomiro Baptista Neto TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente Rádio ALBA',  'José Luis Fernandes Ganem',  'fpj-gr@alba.ba.gov.br',  '3115-0943', 'FUNDACAO PAULO JACKSON Gerente Jose Luis Fernandes Ganem TV ALBA Radio'),“"
+          "(‘FUNDAÇÃO PAULO JACKSON',  'Assessoria Jurídica',  'null',  'fpj-jur@alba.ba.gov.br',  '3115-5480', 'FUNDACAO PAULO JACKSON Assessoria Juridica TV ALBA Radio'),"
+          "(‘FUNDAÇÃO PAULO JACKSON',  'Redação TV ALBA',  'null',  'tvalba@alba.ba.gov.br',  '3115-5395', 'FUNDACAO PAULO JACKSON Redacao TV ALBA'),"
           "('ASSEMBLEIA DE CARINHO',  'Presidente',  'Denise Menezes',  'null',  '3115-4960/3115-5392', 'ASSEMBLEIA DE CARINHO  Presidente  Denise Menezes'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Francisco Raposo',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Francisco Raposo'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Comissão Permanente de Licitação',  'Marcos Caires',  'cpl@alba.ba.gov.br',  '3115-7276/3115-5463', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Comissao Permanente de Licitacao  Marcos Caires'),"
@@ -879,7 +893,7 @@ class BdPlunge {
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'sasg@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Reginaldo Alves',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Reginaldo Alves'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Contratos e Convênios',  'Antonio Sancho',  'dasccc@alba.ba.gov.br',  '3115-7114', 'DIRETORIA ADMINISTRATIVA  Departamento de Contratos e Convenios  Antonio Sancho'),"
-          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Geraldo Dias Abbehusen',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Geraldo Dias Abbehusen'),"
+          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Robson José Coutinho Sousa',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Robson Jose Coutinho Sousa'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Contabilidade',  'Laura Navarro',  'depcont@alba.ba.gov.br',  '3115-4971', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Contabilidade  Laura Navarro'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Análise Contábil',  'Fábio Lima',  'analisecontabil@alba.ba.gov.br',  '3115-5475', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Analise Contabil  Fabio Lima'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Registro Contábil',  'Maria do Perpétuo Sousa',  'sfsrc@alba.ba.gov.br',  '3115-4970', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Registro Contabil  Maria do Perpetuo Sousa'),"
@@ -889,8 +903,8 @@ class BdPlunge {
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Verbas e Cotas Parlamentares',  'Ana Verena Bacellar',  'dvcp@alba.ba.gov.br',  '3115-2943', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Verbas e Cotas Parlamentares  Ana Verena Bacellar'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Diretor',  'Armando Veloso',  'dirinfo@alba.ba.gov.br',  '3115-7298', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Diretor  Armando Veloso'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Suporte e Operação',  'Sidinei Carvalho',  'depso@alba.ba.gov.br',  '3115-2907', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Departamento de Suporte e Operacao  Sidinei Carvalho'),"
-          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Tecnologia da Informação',  'Alexandre Vinicius',  'depti@alba.ba.gov.br',  '3115-2906', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Departamento de Tecnologia da Informacao  Alexandre Vinicius'),"
-          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Desenvolvimento de Sistemas ',  'Vanildo Guimarães',  'sds@alba.ba.gov.br',  '3115-7221', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Coordenacao de Desenvolvimento de Sistemas   Vanildo Guimaraes'),"
+          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Tecnologia da Informação',  'Alexandre Vinicius',  'depti@alba.ba.gov.br',  '3115-2906', 'DIRETORIA TECNOLOGIA DA INFORMACAO  Departamento de Tecnologia da Informacao  Alexandre Vinicius'),"
+          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Desenvolvimento de Sistemas ',  'Vanildo Guimarães',  'sds@alba.ba.gov.br',  '3115-7221', 'DIRETORIA TECNOLOGIA INFORMACAO  Coordenacao de Desenvolvimento de Sistemas   Vanildo Guimaraes'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Informação',  'Bruno Calixto',  'sci@alba.ba.gov.br',  '3115-4070', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Coordenacao de Informacao  Bruno Calixto'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Superintendente',  'Francisco Raposo',  'srh@alba.ba.gov.br',  '3115-4968/3115-4075', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Superintendente  Francisco Raposo'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Administração de Pessoal',  'Cláudio Santana',  'srhdap@alba.ba.gov.br',  '3115-7305', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Administracao de Pessoal  Claudio Santana'),"
@@ -904,11 +918,11 @@ class BdPlunge {
           "('ESCOLA DO LEGISLATIVO',  'Departamento Pedagógico e de Desenvolvimento',  'Marcyane Pirajá',  'escoladolegislativo@alba.ba.gov.br',  '3115-5468', 'ESCOLA DO LEGISLATIVO  Departamento Pedagogico e de Desenvolvimento  Marcyane Piraja'),"
           "('ESCOLA DO LEGISLATIVO',  'Departamento de Projetos Especiais',  'Jéssica Freire',  'escoladolegislativo@alba.ba.gov.br',  '3115-7223', 'ESCOLA DO LEGISLATIVO  Departamento de Projetos Especiais  Jessica Freire'),"
           "('SUPERINTENDÊNCIA DE ASSUNTOS PARLAMENTARES',  'Superintendente',  'Ivoneide Souza Caetano',  'sasp@alba.ba.gov.br',  '3115-7219', 'SUPERINTENDENCIA DE ASSUNTOS PARLAMENTARES  Superintendente  Ivoneide Souza Caetano'),"
-          "('DIRETORIA LEGISLATIVA',  'Diretor',  'Ticiano Lino',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Ticiano Lino'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento de Atos Oficiais  Marize Bastos'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento de Taquigrafia  Marilanja Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Mirela Novais',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao de Apanhamento e Revisao  Mirela Novais'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao de Apoio Taquigrafico  Vera Simoes'),"
+          "('DIRETORIA LEGISLATIVA',  'Diretor',  'Clóvis Ferraz',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Clóvis Ferraz'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento Atos Oficiais  Marize Bastos'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Santos'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Carla Fernandes Santos',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Carla Fernandes Santos'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Controle do Processo Legislativo',  'Licéa Santos',  'dcpl@alba.ba.gov.br',  '3115-7113', 'DIRETORIA LEGISLATIVA  Departamento de Controle do Processo Legislativo  Licea Santos'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Registro',  'Andréa Velloso',  'null',  '3115-2916', 'DIRETORIA LEGISLATIVA  Coordenacao de Registro  Andrea Velloso'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Gesilmara Almeida',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Gesilmara Almeida'),"
@@ -1659,6 +1673,8 @@ class BdPlunge {
           "('Zilton Rocha', 'Justiniano Zilton Rocha', '903732', 'n', 'Justiniano Zilton Rocha'),"
           "('Zó', 'Crisóstomo Antonio Lima', '921266', 's', 'Crisostomo Antonio Lima Zo');",
 
+      "CREATE TABLE $tabControle ($idControleCol INTEGER PRIMARY KEY, $versionAtualCol  TEXT, "
+          "$ultimaVerifcCol DATETIME, $proximaVerifcCol DATETIME);",
     ];
 
     return queryesAtualiz;
@@ -1685,6 +1701,9 @@ class BdPlunge {
       "CREATE TABLE $tabDep ($depIdCol	INTEGER PRIMARY KEY, $depNomeCol TEXT, "
           "$depSexoCol TEXT, $depPartCol TEXT, $depGabCol TEXT, $depTelCol TEXT, "
           "$depEmailCol TEXT, $depFotoCol TEXT, $depLinkCol TEXT);",
+
+      "CREATE TABLE $tabControle ($idControleCol INTEGER PRIMARY KEY, $versionAtualCol  TEXT, "
+          "$ultimaVerifcCol DATETIME, $proximaVerifcCol DATETIME);",
 
       //inserts dos deputados
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
@@ -2381,8 +2400,16 @@ class BdPlunge {
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
           "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
-          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola Júnior',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola Junior'),"
-          "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fundacaopaulojackson@alba.ba.gov.br',  '3115-2935/3115-5397', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis'),"
+          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola da Cunha',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola cunha'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fpj-dg@alba.ba.gov.br',  '3115-2935', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Secretária da Dir Geral',  'Cheila Braga',  '',  '3115-2935', 'FUNDACAO PAULO JACKSON Cheila Braga Diretoria Geral Secretaria TV ALBA Radio'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretoria Administrativa e Financeira',  'Almir Pereira dos Santos',  'fundacaopaulojackson@alba.ba.gov.br',  '3115-5478', 'FUNDACAO PAULO JACKSON Diretoria Administrativa Financeira Almir Pereira dos Santos TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente Financeiro',  'Tânia Borges',  'fundacaopaujackson@alba.ba.gov.br',  '3115-5569', 'FUNDACAO PAULO JACKSON Gerente Financeiro Tania Borges TV ALBA Radio'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Diretoria de Programação',  'Bruno Cássio Moraes Leal',  'fpj-dp@alba.ba.gov.br',  '3115-0921', 'FUNDACAO PAULO JACKSON Diretoria Programacao Bruno Cassio Moraes Leal TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente TV ALBA',  'Theodomiro Baptista Neto',  'fpj-gtv@alba.ba.gov.br',  '3115-5398', 'FUNDACAO PAULO JACKSON Gerente Theodomiro Baptista Neto TV ALBA TVALBA'),"
+          "('FUNDAÇÃO PAULO JACKSON',  'Gerente Rádio ALBA',  'José Luis Fernandes Ganem',  'fpj-gr@alba.ba.gov.br',  '3115-0943', 'FUNDACAO PAULO JACKSON Gerente Jose Luis Fernandes Ganem TV ALBA Radio'),“"
+          "(‘FUNDAÇÃO PAULO JACKSON',  'Assessoria Jurídica',  'null',  'fpj-jur@alba.ba.gov.br',  '3115-5480', 'FUNDACAO PAULO JACKSON Assessoria Juridica TV ALBA Radio'),"
+          "(‘FUNDAÇÃO PAULO JACKSON',  'Redação TV ALBA',  'null',  'tvalba@alba.ba.gov.br',  '3115-5395', 'FUNDACAO PAULO JACKSON Redacao TV ALBA'),"
           "('ASSEMBLEIA DE CARINHO',  'Presidente',  'Denise Menezes',  'null',  '3115-4960/3115-5392', 'ASSEMBLEIA DE CARINHO  Presidente  Denise Menezes'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Francisco Raposo',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Francisco Raposo'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Comissão Permanente de Licitação',  'Marcos Caires',  'cpl@alba.ba.gov.br',  '3115-7276/3115-5463', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Comissao Permanente de Licitacao  Marcos Caires'),"
@@ -2401,7 +2428,7 @@ class BdPlunge {
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'sasg@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Reginaldo Alves',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Reginaldo Alves'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Contratos e Convênios',  'Antonio Sancho',  'dasccc@alba.ba.gov.br',  '3115-7114', 'DIRETORIA ADMINISTRATIVA  Departamento de Contratos e Convenios  Antonio Sancho'),"
-          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Geraldo Dias Abbehusen',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Geraldo Dias Abbehusen'),"
+          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Robson José Coutinho Sousa',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Robson Jose Coutinho Sousa'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Contabilidade',  'Laura Navarro',  'depcont@alba.ba.gov.br',  '3115-4971', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Contabilidade  Laura Navarro'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Análise Contábil',  'Fábio Lima',  'analisecontabil@alba.ba.gov.br',  '3115-5475', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Analise Contabil  Fabio Lima'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Registro Contábil',  'Maria do Perpétuo Sousa',  'sfsrc@alba.ba.gov.br',  '3115-4970', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Registro Contabil  Maria do Perpetuo Sousa'),"
@@ -2411,8 +2438,8 @@ class BdPlunge {
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Verbas e Cotas Parlamentares',  'Ana Verena Bacellar',  'dvcp@alba.ba.gov.br',  '3115-2943', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Verbas e Cotas Parlamentares  Ana Verena Bacellar'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Diretor',  'Armando Veloso',  'dirinfo@alba.ba.gov.br',  '3115-7298', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Diretor  Armando Veloso'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Suporte e Operação',  'Sidinei Carvalho',  'depso@alba.ba.gov.br',  '3115-2907', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Departamento de Suporte e Operacao  Sidinei Carvalho'),"
-          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Tecnologia da Informação',  'Alexandre Vinicius',  'depti@alba.ba.gov.br',  '3115-2906', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Departamento de Tecnologia da Informacao  Alexandre Vinicius'),"
-          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Desenvolvimento de Sistemas ',  'Vanildo Guimarães',  'sds@alba.ba.gov.br',  '3115-7221', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Coordenacao de Desenvolvimento de Sistemas   Vanildo Guimaraes'),"
+          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Departamento de Tecnologia da Informação',  'Alexandre Vinicius',  'depti@alba.ba.gov.br',  '3115-2906', 'DIRETORIA TECNOLOGIA DA INFORMACAO  Departamento de Tecnologia da Informacao  Alexandre Vinicius'),"
+          "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Desenvolvimento de Sistemas ',  'Vanildo Guimarães',  'sds@alba.ba.gov.br',  '3115-7221', 'DIRETORIA TECNOLOGIA INFORMACAO  Coordenacao de Desenvolvimento de Sistemas   Vanildo Guimaraes'),"
           "('DIRETORIA DE TECNOLOGIA DA INFORMAÇÃO',  'Coordenação de Informação',  'Bruno Calixto',  'sci@alba.ba.gov.br',  '3115-4070', 'DIRETORIA DE TECNOLOGIA DA INFORMACAO  Coordenacao de Informacao  Bruno Calixto'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Superintendente',  'Francisco Raposo',  'srh@alba.ba.gov.br',  '3115-4968/3115-4075', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Superintendente  Francisco Raposo'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Administração de Pessoal',  'Cláudio Santana',  'srhdap@alba.ba.gov.br',  '3115-7305', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Administracao de Pessoal  Claudio Santana'),"
@@ -2426,11 +2453,11 @@ class BdPlunge {
           "('ESCOLA DO LEGISLATIVO',  'Departamento Pedagógico e de Desenvolvimento',  'Marcyane Pirajá',  'escoladolegislativo@alba.ba.gov.br',  '3115-5468', 'ESCOLA DO LEGISLATIVO  Departamento Pedagogico e de Desenvolvimento  Marcyane Piraja'),"
           "('ESCOLA DO LEGISLATIVO',  'Departamento de Projetos Especiais',  'Jéssica Freire',  'escoladolegislativo@alba.ba.gov.br',  '3115-7223', 'ESCOLA DO LEGISLATIVO  Departamento de Projetos Especiais  Jessica Freire'),"
           "('SUPERINTENDÊNCIA DE ASSUNTOS PARLAMENTARES',  'Superintendente',  'Ivoneide Souza Caetano',  'sasp@alba.ba.gov.br',  '3115-7219', 'SUPERINTENDENCIA DE ASSUNTOS PARLAMENTARES  Superintendente  Ivoneide Souza Caetano'),"
-          "('DIRETORIA LEGISLATIVA',  'Diretor',  'Ticiano Lino',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Ticiano Lino'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento de Atos Oficiais  Marize Bastos'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento de Taquigrafia  Marilanja Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Mirela Novais',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao de Apanhamento e Revisao  Mirela Novais'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao de Apoio Taquigrafico  Vera Simoes'),"
+          "('DIRETORIA LEGISLATIVA',  'Diretor',  'Clóvis Ferraz',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Clóvis Ferraz'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento Atos Oficiais  Marize Bastos'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Santos'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Carla Fernandes Santos',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Carla Fernandes Santos'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Controle do Processo Legislativo',  'Licéa Santos',  'dcpl@alba.ba.gov.br',  '3115-7113', 'DIRETORIA LEGISLATIVA  Departamento de Controle do Processo Legislativo  Licea Santos'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Registro',  'Andréa Velloso',  'null',  '3115-2916', 'DIRETORIA LEGISLATIVA  Coordenacao de Registro  Andrea Velloso'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Gesilmara Almeida',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Gesilmara Almeida'),"
@@ -3180,6 +3207,7 @@ class BdPlunge {
           "('Zezito Pena', 'José Valdomiro Pena', '5000343', 'n', 'Jose Valdomiro Pena Zezito'),"
           "('Zilton Rocha', 'Justiniano Zilton Rocha', '903732', 'n', 'Justiniano Zilton Rocha'),"
           "('Zó', 'Crisóstomo Antonio Lima', '921266', 's', 'Crisostomo Antonio Lima Zo');",
+
     ];
     return queryes;
   }

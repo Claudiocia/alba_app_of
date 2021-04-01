@@ -8,8 +8,8 @@ class LivrosApiBd {
   LivrosApiBd();
   int max;
   final String htmlAlba = "http://www.al.ba.gov.br";
-  List<LivroModel> listLivros = List();
-  List<LivroModel> listLivrosBd = List();
+  List<LivroModel> listLivros = [];
+  List<LivroModel> listLivrosBd = [];
   LivroHelper helperLivro = LivroHelper();
 
 
@@ -26,11 +26,10 @@ class LivrosApiBd {
       var numPag = numberOfPag[0]['attributes'];
       String pagina = (numPag.toString()).trim();
       max = int.parse(pagina.substring(40, (pagina.length - 9)));
-      print("\nA pagina 2 ja como int É: ${max}");
+
     }
 
     //laço para buscar todas as páginas de livros
-    List<Map<String, dynamic>> elements = List();
     for(int i = 0; i <= max; i++){
       if(await webScraperLiv.loadWebPage("/midia-center/alba-cultural?page=$i&size=20")){
         List<Map<String, dynamic>> elements1 =
@@ -66,9 +65,6 @@ class LivrosApiBd {
           await detalheLivro(livro).then((value){
             livro2 = value;
           });
-
-          print("O livro no final antes de entrar na lista é: ${livro2.toString()}");
-
           await helperLivro.saveLivro(livro2);
 
           listLivros.add(livro2);
@@ -76,13 +72,13 @@ class LivrosApiBd {
       }
     }
 
-    print("\nTamanho final da lista de livros é ${listLivros.length}");
+
 
     Comparator<LivroModel> ordemComparator =
         (a, b) => b.dataLivro.compareTo(a.dataLivro);
 
     listLivros.sort(ordemComparator);
-    print("O resultado imprimindo a lista de livros ${listLivros}");
+
 
     return listLivros;
   }
@@ -171,7 +167,7 @@ class LivrosApiBd {
       var numPag = numberOfPag[0]['attributes'];
       String pagina = (numPag.toString()).trim();
       max = int.parse(pagina.substring(40, (pagina.length - 9)));
-      print("\nA pagina 2 ja como int É: ${max}");
+
     }
 
     return max;

@@ -12,7 +12,7 @@ class PlaceSobreAppWidget extends StatefulWidget {
 
 class _PlaceSobreAppWidgetState extends State<PlaceSobreAppWidget> {
   MesaDirHelper helperMesa = MesaDirHelper();
-  List<MesaDirModel> listMesa = List();
+  List<MesaDirModel> listMesa = [];
   bool isLoading = false;
 
   final textParagrafo_1 = "Este aplicativo foi desenvolvido com o objetivo de ampliar a "

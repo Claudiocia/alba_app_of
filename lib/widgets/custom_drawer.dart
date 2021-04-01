@@ -1,4 +1,5 @@
 import 'package:alba_app/models/usuario_model.dart';
+import 'package:alba_app/presentation/custom_icons_icons.dart';
 import 'package:alba_app/widgets/tile/drawer_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -47,7 +48,7 @@ class CustomDrawer extends StatelessWidget {
                       left: 110.0,
                       child: Text(
                         "Assembleia\nLegislativa\nda Bahia",
-                        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontFamily: 'Dosis',  fontSize: 25.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Positioned(
@@ -66,7 +67,7 @@ class CustomDrawer extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 "Olá, $usuario",
-                                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontFamily: 'Dosis', fontSize: 18.0, fontWeight: FontWeight.bold),
                               ),
                             ],
                           );
@@ -77,15 +78,15 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.library_books, "Notícias", 0),
-              DrawerTile(Icons.people, "Deputados", 1),
-              DrawerTile(Icons.people_outline, "Todos Dep.", 7),
-              DrawerTile(Icons.contact_phone, "Telefones Úteis", 2),
-              DrawerTile(Icons.dashboard, "Mais ALBA", 3),
+              DrawerTile(CustomIcons.notic, "Notícias", 0),
+              DrawerTile(CustomIcons.dep_par, "Deputados", 1),
+              DrawerTile(CustomIcons.dep, "Todos Dep.", 7),
+              DrawerTile(CustomIcons.tel_uteis, "Telefones Úteis", 2),
+              DrawerTile(CustomIcons.alba_mais, "Mais ALBA", 3),
               Divider(),
-              DrawerTile(Icons.share, "Redes Sociais", 4),
-              DrawerTile(Icons.info, "Sobre a ALBA", 5),
-              DrawerTile(Icons.perm_device_information, "Sobre o App", 6),
+              DrawerTile(CustomIcons.compart, "Redes Sociais", 4),
+              DrawerTile(CustomIcons.inform, "Sobre a ALBA", 5),
+              DrawerTile(CustomIcons.sobre_app, "Sobre o App", 6),
             ],
           )
         ],

@@ -12,7 +12,7 @@ class PlacePartidosWidget extends StatefulWidget {
 
 class _PlacePartidosWidgetState extends State<PlacePartidosWidget> {
   PartidoHelper helperPart = PartidoHelper();
-  List<PartidoModel> listPart = List();
+  List<PartidoModel> listPart = [];
   String lider, vice;
 
   @override

@@ -39,7 +39,7 @@ class _PlaceTVAlbaWidgetState extends State<PlaceTVAlbaWidget> {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
     } else {
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           "Verifique sua conexão de rede!!",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

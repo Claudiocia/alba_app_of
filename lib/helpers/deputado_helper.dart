@@ -65,7 +65,7 @@ class DeputadoHelper {
   Future<List> getAllDeps() async {
     Database dbDep = await BdPlunge.instance.dbAlba;
     List listMap = await dbDep.rawQuery("SELECT * FROM $tabDep ORDER BY $depNomeCol ASC");
-    List<DeputadoModel> listDeps = List();
+    List<DeputadoModel> listDeps = [];
     for(Map m in listMap){
       listDeps.add(DeputadoModel.fromMap(m));
     }

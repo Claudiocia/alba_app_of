@@ -14,7 +14,7 @@ class PlaceAlbaCultWidget extends StatefulWidget {
 
 class _PlaceAlbaCultWidgetState extends State<PlaceAlbaCultWidget> {
   LivrosApiBd livrosApiBd = LivrosApiBd();
-  List<LivroModel> listLivros = List();
+  List<LivroModel> listLivros = [];
   LivroModel livro;
   bool isLoading = false;
 

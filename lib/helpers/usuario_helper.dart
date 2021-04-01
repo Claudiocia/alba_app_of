@@ -52,7 +52,7 @@ class UsuarioHelper {
   Future<List> getAllUsers() async{
     Database dbUser = await BdPlunge.instance.dbAlba;
     List listMap = await dbUser.rawQuery("SELECT * FROM $tabUser");
-    List<UsuarioModel> listUser = List();
+    List<UsuarioModel> listUser = [];
     for(Map m in listMap){
       listUser.add(UsuarioModel.fromMap(m));
     }

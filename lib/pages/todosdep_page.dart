@@ -6,6 +6,7 @@ import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class PlaceTodosDepWidget extends StatefulWidget {
   String valorPesq;
   PlaceTodosDepWidget({this.valorPesq});
@@ -16,7 +17,7 @@ class PlaceTodosDepWidget extends StatefulWidget {
 class _PlaceTodosDepWidgetState extends State<PlaceTodosDepWidget> {
   bool isLoading = false;
   TodoDepHelper helperTodoDep = TodoDepHelper();
-  List<TodoDepModel> listTodoDep = List();
+  List<TodoDepModel> listTodoDep = [];
   UtilidadeGeral utils = UtilidadeGeral();
   String pesq;
   String pathDep = "http://www.al.ba.gov.br/deputados/deputado-estadual/";
@@ -35,7 +36,6 @@ class _PlaceTodosDepWidgetState extends State<PlaceTodosDepWidget> {
     }else{
       isLoading = true;
       pesq = utils.removeAcents(widget.valorPesq);
-      print("O valor a ser pesquisado é: ${pesq}");
       helperTodoDep.getResultBusca(pesq).then((list){
         setState(() {
           if(list != null){
@@ -190,7 +190,7 @@ class _PlaceTodosDepWidgetState extends State<PlaceTodosDepWidget> {
                             "Selecione a ação que você deseja!"
                         ),
                         actions: <Widget>[
-                          FlatButton(
+                          TextButton(
                               onPressed: (){
                                 if(listTodoDep[index].inMandat == 's'){
                                   _launchURL(pathDep + listTodoDep[index].linkPagin);
@@ -201,7 +201,7 @@ class _PlaceTodosDepWidgetState extends State<PlaceTodosDepWidget> {
                                 }
                               },
                               child: Text('VISITAR A PÁGINA')),
-                          FlatButton(
+                          TextButton(
                               onPressed: () => Navigator.of(context).pop(
                                   true),
                               child: Text('FECHAR'))

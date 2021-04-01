@@ -75,7 +75,7 @@ class UsuarioModel extends Model {
     isLoading = true;
     notifyListeners();
 
-    List<Map> listUser = List();
+    List<Map> listUser = [];
     UsuarioModel user = new UsuarioModel();
     helperUser.getAllUsers().then((list){
       listUser = list;

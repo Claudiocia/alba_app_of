@@ -124,7 +124,7 @@ class _PlaceCadastroWidgetState extends State<PlaceCadastroWidget> {
   }
 
   void _onSucess(){
-    _scaffoldKey.currentState.showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Registro salvo com sucesso!!",
           style: TextStyle(color: Colors.white,
               fontWeight: FontWeight.bold),
@@ -139,7 +139,7 @@ class _PlaceCadastroWidgetState extends State<PlaceCadastroWidget> {
   }
 
   void _onFail(){
-    _scaffoldKey.currentState.showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Registro falhou!!",
           style: TextStyle(color: Colors.white,
               fontWeight: FontWeight.bold),

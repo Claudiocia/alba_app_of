@@ -22,7 +22,7 @@ class UtilidadeGeral {
   }
 
   void showToast(BuildContext context, String msg) {
-    final scaffold = Scaffold.of(context);
+    final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
         content: Text(msg),
