@@ -46,12 +46,14 @@ class VersionMyApp{
       if(value != null){
         versionServidor = value;
         print("o valor na verific versao é: " + value);
+        print("Versão servidor é: "+versionServidor + " Versão atual é: " + versAtual);
       }else{
         versionServidor = versAtual;
         print("Não deu tempo");
       }
     });
     if(versionServidor != versAtual){
+      print("Versão servidor é: "+versionServidor + " Versão atual é: " + versAtual);
       return true;
     }else{
       return false;
