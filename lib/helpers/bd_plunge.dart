@@ -117,8 +117,8 @@ class BdPlunge {
     if (dbAlb != null) {
       _version = await dbAlb.getVersion();
 
-      if(_version < 2 ){
-        dbAlb = await updateDb(dbAlb, _version, 3);
+      if(_version <= 7 ){
+        dbAlb = await updateDb(dbAlb, _version, 8);
         return dbAlb;
       }else{
         return dbAlb;
@@ -135,7 +135,7 @@ class BdPlunge {
 
     List<String> listQueries = formQueries();
 
-    return await openDatabase(path, version: 2,
+    return await openDatabase(path, version: 8,
         onCreate: (Database db, int newerVersion) async {
           for (String query in listQueries) {
             await db.execute(query);
@@ -270,7 +270,7 @@ class BdPlunge {
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Fabrício Falcão', 'm', 'PC do B', "
-          "'Anexo Nelson David Ribeiro - gab. 209', '3115-4079/3115-5295/3115-5296', "
+          "'Anexo Nelson David Ribeiro - gab. 209', '3115-7013/3115-5295/3115-5296', "
           "'fabriciofalcao@alba.ba.gov.br', 'fabriciofalcao.jpg', '915868');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
@@ -339,6 +339,11 @@ class BdPlunge {
           "'lucianosimoes.jpg', '921278');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
+          "VALUES ('Luiz Augusto', 'm', 'PP', 'Anexo Wilson Lins - gab. 305', "
+          "'3115-7169/3115-7021/3115-5311', 'laugusto@alba.ba.gov.br', "
+          "'luizaugusto.jpg', '930496');",
+      "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
+          " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Marcelinho Veiga', 'm', 'PSB', 'Anexo Wilson Lins - gab. 307', "
           "'3115-2923/3115-4092/3115-4908', 'depmveiga@alba.ba.gov.br', "
           "'marceloveiga.jpg', '926899');",
@@ -362,11 +367,6 @@ class BdPlunge {
           "VALUES ('Mirela Macedo', 'f', 'PSD', 'Anexo Wilson Lins - gab. 205', "
           "'3115-4099/3115-5219', 'mirelamacedo@alba.ba.gov.br', 'mirelamacedo.jpg', "
           "'923798');",
-      "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
-          " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
-          "VALUES ('Nelson Leal', 'm', 'PP', 'Anexo Wilson Lins - gab. 305', "
-          "'3115-5311/3115-7021/3115-7169', 'nleal@alba.ba.gov.br', "
-          "'nelsonleal.jpg', '903706');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Neusa Lula Cadore', 'f', 'PT', 'Anexo Nelson David Ribeiro - gab. 305', "
@@ -510,7 +510,7 @@ class BdPlunge {
           "'Com. de Agricultura e Política Rural', 'Permanente', '3115-7215/3115-2913', "
           "'Sala Jadiel Matos', 'Terça-feira', '09h', 'Jusmari Oliveira', 'Sandro Régis', "
           "'Eduardo Salles/Jacó Lula da Silva/Neusa Lula Cadore/Tom Araújo/Vitor Bonfim/Zó', "
-          "'Aderbal Caldas/Antonio Henrique Jr./Osni Cardoso Lula da Silva/Paulo Câmara/Pedro Tavares/', 'Bruna de Souza Santana');",
+          "'Aderbal Caldas/Antonio Henrique Jr./Osni Cardoso Lula da Silva/Paulo Câmara/Pedro Tavares', 'Bruna de Souza Santana');",
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
@@ -564,10 +564,10 @@ class BdPlunge {
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
-          "'Com. de Ética e Decoro Parlamentar', 'Permanente', '3115-7235/3115-2909', 'null', "
-          "'null', 'null', 'Marquinho Viana', 'Sandro Régis', "
-          "'Euclides Fernandes/Luciano Simões Filho/Jurandy Oliveira/Bobô/Fabíola Mansur/Zé Raimundo Lula', "
-          "'Tiago Correia/Eduardo Alencar/Neusa Lula Cadore/Fátima Nunes Lula/Samuel Júnior/Vitor Bonfim/Eduardo Salles', 'null');",
+          "'Cons. de Ética e Decoro Parlamentar', 'Permanente', '3115-7235/3115-2909', 'Não Informado', "
+          "'Não Informado', 'Não Informado', 'Marquinho Viana', 'Sandro Régis', "
+          "'Euclides Fernandes/Luciano Simões Filho/Aderbal Caldas/Bobô/Fabíola Mansur/Zé Raimundo Lula', "
+          "'Tiago Correia/Eduardo Alencar/Neusa Lula Cadore/Fátima Nunes Lula/Samuel Júnior/Vitor Bonfim/Eduardo Salles', 'Não Informado');",
 
       //FIM DAS PERMANENTES INICIO DAS TEMPORARIAS --ATUALIZAÇÃO
 
@@ -608,8 +608,8 @@ class BdPlunge {
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
           "'Com. Especial de Desenvolvimento Regional', 'Temporária', '3115-7306/3115-7307', "
           "'Sala Herculano Menezes', 'Quarta-feira', '11h', 'Alex da Piatã', 'Tiago Correia', "
-          "'Antonio Henrique Jr./Capitão Alden/Fátima Nunes Lula/Olívia Santana/Roberto Carlos/Rogério Andrade Filho', "
-          "'Neusa Lula Cadore/Pedro Tavares/Zó', "
+          "'Antonio Henrique Jr./Capitão Alden/Fátima Nunes Lula/Olívia Santana/Roberto Carlos', "
+          "'Neusa Lula Cadore/Pedro Tavares/Rogério Andrade Filho/Zó', "
           "'Tania Maria da Silva Bispo');",
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
@@ -635,7 +635,7 @@ class BdPlunge {
           "'Temporária', '3115-7110', 'Sala Jadiel Matos', "
           "'Quarta-feira', '11h', 'Angelo Almeida', 'Talita Oliveira', "
           "'Alex da Piatã/Fátima Nunes Lula/Jacó Lula da Silva/Mirela Macedo/Tiago Correia/Vitor Bonfim', "
-          "'José de Arimateia/Maria del Carmen Lula/Olivia Santana/Pastor Isidório Filho', 'Bruna de Souza Santana');",
+          "'Fabíola Mansur/José de Arimateia/Maria del Carmen Lula/Olivia Santana/Pastor Isidório Filho', 'Bruna de Souza Santana');",
 
       //FIM DAS COMISSOES ----- INICIO DA MESA DIRETORA --ATUALIZAÇÃO
 
@@ -736,7 +736,7 @@ class BdPlunge {
       //PP - 9 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
           "$partLiderCol, $partViceCol, $partQtdCol) VALUES ('Bancada', "
-          "'Partido Progressista', 'PP', 'Eduardo Salles', 'Nelson Leal/Niltinho', 9);",
+          "'Partido Progressista', 'PP', 'Eduardo Salles', 'Luiz Augusto/Niltinho', 9);",
 
       //DEM - 5 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
@@ -814,7 +814,7 @@ class BdPlunge {
       //Bloco da Minoria - 18 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
           "$partLiderCol, $partViceCol, $partQtdCol) VALUES ('BlocoM', "
-          "'Bloco da Minoria', 'DEM/PSDB/PSC/PSL/Republicanos/MDB', 'Sandro Régis', "
+          "'Bloco da Minoria', 'DEM/PSDB/PSC/PSL/Republicanos/Patriota/MDB', 'Sandro Régis', "
           "'Carlos Geilson/Jurailton Santos/Tom Araújo', 18);",
 
       //Blocos partidários ------------ --ATUALIZAÇÃO
@@ -861,7 +861,7 @@ class BdPlunge {
           "('GABINETE DA PRESIDÊNCIA',  'Assessor de Relações Institucionais',  'Hermógenes Gomes Neto',  'null',  '3115-4906/3115-4965', 'GABINETE DA PRESIDENCIA  Assessor de Relacoes Institucionais  Hermogenes Gomes Neto'),"
           "('GABINETE DA PRESIDÊNCIA',  'Assessoria de Comunicação Presidencia',  'Nestor Mendes',  'null',  '3115-7334', 'GABINETE DA PRESIDENCIA  Assessoria de Comunicacao Presidencia  Nestor Mendes'),"
           "('PROCURADORIA GERAL',  'Procurador Geral',  'Graciliano Bomfim',  'pgeral@alba.ba.gov.br',  '3115-7241/3115-7168', 'PROCURADORIA GERAL  Procurador Geral  Graciliano Bomfim'),"
-          "('PROCURADORIA GERAL',  'Subprocurador Geral',  'Bianca Sena Hilarião',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Bianca Sena Hilariao'),"
+          "('PROCURADORIA GERAL',  'Subprocuradora Geral',  'Laura Duran(respondendo)',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Laura Duran'),"
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
           "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
@@ -876,24 +876,24 @@ class BdPlunge {
           "('FUNDAÇÃO PAULO JACKSON',  'Assessoria Jurídica',  'null', 'fpj-jur@alba.ba.gov.br', '3115-5480', 'FUNDACAO PAULO JACKSON Assessoria Juridica TV ALBA Radio'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Redação TV ALBA',  'null', 'tvalba@alba.ba.gov.br', '3115-5395', 'FUNDACAO PAULO JACKSON Redacao TV ALBA'),"
           "('ASSEMBLEIA DE CARINHO',  'Presidente',  'Denise Menezes',  'null',  '3115-4960/3115-5392', 'ASSEMBLEIA DE CARINHO  Presidente  Denise Menezes'),"
-          "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Francisco Raposo',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Francisco Raposo'),"
+          "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Robson José Coutinho Sousa',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Jose Coutinho Sousa Souza'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Comissão Permanente de Licitação',  'Marcos Caires',  'cpl@alba.ba.gov.br',  '3115-7276/3115-5463', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Comissao Permanente de Licitacao  Marcos Caires'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Diretor',  'Elias Dourado',  'da@alba.ba.gov.br',  '3115-7280/3115-7258', 'DIRETORIA ADMINISTRATIVA  Diretor  Elias Dourado'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Diretor',  'Júlio Eloy Passos Neto',  'da@alba.ba.gov.br',  '3115-7280/3115-7258', 'DIRETORIA ADMINISTRATIVA  Diretor  Julio Eloy Passos Neto'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Engenharia e Projetos',  'Tácio Borges Guimarães',  'sasem@alba.ba.gov.br',  '3115-7096', 'DIRETORIA ADMINISTRATIVA  Departamento de Engenharia e Projetos  Tacio Borges Guimaraes'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Departamento de Material e Patrimônio',  'Jovina Lúcia Santos da Silva',  'demap@alba.ba.gov.br',  '3115-4943', 'DIRETORIA ADMINISTRATIVA  Departamento de Material e Patrimonio  Jovina Lucia Santos da Silva'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Aquisição',  'Célia Braúna',  'aquisicao@alba.ba.gov.br',  '3115-7263', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Aquisicao  Celia Brauna'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Departamento de Material e Patrimônio',  'Rafael Portela',  'demap@alba.ba.gov.br',  '3115-4943', 'DIRETORIA ADMINISTRATIVA  Departamento de Material e Patrimonio  Rafael Portela'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Aquisição',  'Breno Sena',  'aquisicao@alba.ba.gov.br',  '3115-7263', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Aquisicao  Breno Sena'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Patrimônio',  'Marcos Vinicios Senna',  'patrimonio@alba.ba.gov.br',  '3115-7186', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Patrimonio  Marcos Vinicios Senna'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Almoxarifado',  'Adelson Palmeira',  'sad@alba.ba.gov.br',  '3115-7229', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Almoxarifado  Adelson Palmeira'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Almoxarifado',  'Rogério Ítalo Cardoso dos Santos',  'sad@alba.ba.gov.br',  '3115-7229', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Almoxarifado  Rogerio Italo Cardoso dos Santos'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Serviços Auxiliares',  'Rafael da Silva Brito',  'sadsa@alba.ba.gov.br',  '3115-4933', 'DIRETORIA ADMINISTRATIVA  Departamento de Servicos Auxiliares  Rafael da Silva Brito'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Segurança',  'Djalma Filho',  'seguranca.civil@alba.ba.gov.br',  '3115-4982', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Seguranca  Djalma Filho'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Transportes',  'a definir',  'satransp@alba.ba.gov.br',  '3115-7345', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Transportes  a definir'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Manutenção',  'Gustavo Duran Brito',  'sasm@alba.ba.gov.br',  '3115-7179', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Manutencao  Gustavo Duran Brito'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Apoio Administrativo',  'José Valdemir',  'sadag@alba.ba.gov.br',  '3115-7046', 'DIRETORIA ADMINISTRATIVA  Departamento de Apoio Administrativo  Jose Valdemir'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Protocolo',  'Miriam Menezes',  'protocoloalba@alba.ba.gov.br',  '3115-7047', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Protocolo  Miriam Menezes'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'sasg@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Reginaldo Alves',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Reginaldo Alves'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Protocolo',  'Mirian Farias',  'protocoloalba@alba.ba.gov.br',  '3115-7047', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Protocolo Mirian  Miriam Farias'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'coordgrafica@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Levino Costa Lima',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Levino Costa Lima'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Contratos e Convênios',  'Antonio Sancho',  'dasccc@alba.ba.gov.br',  '3115-7114', 'DIRETORIA ADMINISTRATIVA  Departamento de Contratos e Convenios  Antonio Sancho'),"
-          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Robson José Coutinho Sousa',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Robson Jose Coutinho Sousa'),"
+          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'a definir',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Contabilidade',  'Laura Navarro',  'depcont@alba.ba.gov.br',  '3115-4971', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Contabilidade  Laura Navarro'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Análise Contábil',  'Fábio Lima',  'analisecontabil@alba.ba.gov.br',  '3115-5475', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Analise Contabil  Fabio Lima'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Registro Contábil',  'Maria do Perpétuo Sousa',  'sfsrc@alba.ba.gov.br',  '3115-4970', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Registro Contabil  Maria do Perpetuo Sousa'),"
@@ -920,14 +920,14 @@ class BdPlunge {
           "('SUPERINTENDÊNCIA DE ASSUNTOS PARLAMENTARES',  'Superintendente',  'Ivoneide Souza Caetano',  'sasp@alba.ba.gov.br',  '3115-7219', 'SUPERINTENDENCIA DE ASSUNTOS PARLAMENTARES  Superintendente  Ivoneide Souza Caetano'),"
           "('DIRETORIA LEGISLATIVA',  'Diretor',  'Clóvis Ferraz',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Clóvis Ferraz'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento Atos Oficiais  Marize Bastos'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Carla Fernandes Santos',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Carla Fernandes Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Pereira',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Pereira'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Mirela Novais',  'coare@alba.ba.gov.br',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Mirela Novais'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'coara@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Controle do Processo Legislativo',  'Licéa Santos',  'dcpl@alba.ba.gov.br',  '3115-7113', 'DIRETORIA LEGISLATIVA  Departamento de Controle do Processo Legislativo  Licea Santos'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Registro',  'Andréa Velloso',  'null',  '3115-2916', 'DIRETORIA LEGISLATIVA  Coordenacao de Registro  Andrea Velloso'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Gesilmara Almeida',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Gesilmara Almeida'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Marjorie Fontes',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Marjorie Fontes'),"
           "('DIRETORIA PARLAMENTAR',  'Diretor',  'Geraldo Mascarenhas',  'dpa@alba.ba.gov.br',  '3115-7274', 'DIRETORIA PARLAMENTAR  Diretor  Geraldo Mascarenhas'),"
-          "('DIRETORIA PARLAMENTAR',  'Departamento de Documentação e Informação ',  'Tânia Queiroz ',  'bib@alba.ba.gov.br',  '3115-4973', 'DIRETORIA PARLAMENTAR  Departamento de Documentacao e Informacao   Tania Queiroz'),"
+          "('DIRETORIA PARLAMENTAR',  'Departamento de Documentação e Informação ',  'Tânia Queiroz',  'bib@alba.ba.gov.br',  '3115-4973', 'DIRETORIA PARLAMENTAR  Departamento de Documentacao e Informacao Tania Queiroz'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Biblioteca',  'Iracilda Nunes',  'bib@alba.ba.gov.br',  '3115-5229', 'DIRETORIA PARLAMENTAR  Coordenacao de Biblioteca  Iracilda Nunes'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Anais',  'Dora Maria Silva',  'anais@alba.ba.gov.br',  '3115-7220', 'DIRETORIA PARLAMENTAR  Coordenacao de Anais  Dora Maria Silva'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Arquivo Geral e Microfilmagem',  'Raquel Machado',  'arquivogeral@alba.ba.gov.br',  '3115-7112', 'DIRETORIA PARLAMENTAR  Coordenacao de Arquivo Geral e Microfilmagem  Raquel Machado'),"
@@ -939,6 +939,7 @@ class BdPlunge {
           "('DIVERSOS',  'Grupo Editorial',  'null',  'null',  '3115-7243', 'DIVERSOS  Grupo Editorial'),"
           "('DIVERSOS',  'Assalba',  'null',  'null',  '3115-2962/3115-7038', 'DIVERSOS  Assalba'),"
           "('DIVERSOS',  'Central Telefônica',  'null',  'null',  '3115-7399/3115-7268', 'DIVERSOS  Central Telefonica'),"
+          "('DIVERSOS',  'Central Celular',  'null',  'null',  '3115-5260/3115-4944', 'DIVERSOS  Central Celular'),"
           "('DIVERSOS',  'Comitê de Imprensa',  'null',  'null',  '3115-7117', 'DIVERSOS  Comite de Imprensa'),"
           "('DIVERSOS',  'Copa - 1º andar Presidência',  'null',  'null',  '3115-7224', 'DIVERSOS  Copa - 1º andar Presidencia'),"
           "('DIVERSOS',  'Copa - 3º andar',  'null',  'null',  '3115-7204', 'DIVERSOS  Copa - 3º andar'),"
@@ -948,20 +949,23 @@ class BdPlunge {
           "('DIVERSOS',  'Lanchonete',  'null',  'null',  '3115-7232', 'DIVERSOS  Lanchonete'),"
           "('DIVERSOS',  'Plenário',  'null',  'null',  '3115-7115', 'DIVERSOS  Plenario'),"
           "('DIVERSOS',  'Saguão do Plenário',  'null',  'null',  '3115-7284', 'DIVERSOS  Saguao do Plenario'),"
-          "('DIVERSOS',  'Sala de Estar (cafezinho)',  'null',  'null',  '3115-7290', 'DIVERSOS  Sala de Estar (cafezinho)'),"
-          "('DIVERSOS',  'Tribuna de Imprensa',  'null',  'null',  '3115-7273', 'DIVERSOS  Tribuna de Imprensa'),"
-          "('DIVERSOS',  'Salão Verde',  'null',  'null',  '3115-7134', 'DIVERSOS  Salao Verde'),"
+          "('DIVERSOS',  'Sala de Estar (cafezinho)',  'null',  'null',  '3115-7290', 'DIVERSOS plenario Sala de Estar (cafezinho)'),"
+          "('DIVERSOS',  'Copa',  'null',  'null',  '3115-4046', 'DIVERSOS  Copa plenario'),"
+          "('DIVERSOS',  'Tribuna de Imprensa',  'null',  'null',  '3115-7273', 'DIVERSOS plenario Tribuna de Imprensa'),"
+          "('DIVERSOS',  'Salão Verde',  'null',  'null',  '3115-7134', 'DIVERSOS plenario Salao Verde'),"
           "('DIVERSOS',  'Salão Nobre',  'null',  'null',  '3115-7162', 'DIVERSOS  Salao Nobre'),"
           "('DIVERSOS',  'Portaria de Correspondência',  'null',  'null',  '3115-7111', 'DIVERSOS  Portaria de Correspondencia'),"
-          "('DIVERSOS',  'Portaria - Recepção',  'null',  'null',  '3115-7116/3115-7102', 'DIVERSOS  Portaria - Recepcao'),"
+          "('DIVERSOS',  'Portaria - Recepção',  'null',  'null',  '3115-7116/3115-7102', 'DIVERSOS  Portaria Recepcao'),"
           "('DIVERSOS',  'Refeitório',  'null',  'null',  '3115-7329', 'DIVERSOS  Refeitorio'),"
-          "('DIVERSOS',  'Restaurante A La Carte',  'null',  'null',  '3115-7314', 'DIVERSOS  Restaurante A La Carte'),"
+          "('DIVERSOS',  'Restaurante A La Carte',  'null',  'null',  '3115-7314', 'DIVERSOS  Restaurante Carte'),"
           "('DIVERSOS',  'Salão de Beleza',  'null',  'null',  '3115-5496', 'DIVERSOS  Salao de Beleza'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Agda Paiva',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Gerente  Agda Paiva'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Delma Ribeiro',  'null',  '3115-7146', 'BANCO BRADESCO Posto Assembleia  Gerente  Delma Ribeiro'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Sala Vip',  'null',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Sala Vip'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Agda Paiva',  'null',  '3115-4056', 'BANCO BRADESCO Posto Assembleia  Gerente  Agda Paiva'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Tais Gomes',  'null',  '3115-7146', 'BANCO BRADESCO Posto Assembleia  Gerente  Tais Gomes'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Felipe Barbosa',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Gerente  Felipe Barbosa'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Sala Vip',  'null',  'null',  '3115-7128', 'BANCO BRADESCO Posto Assembleia  Sala Vip'),"
           "('BANCO BRADESCO Posto Assembleia',  'Seguros',  'Rosângela Rivas',  'null',  '3115-4056', 'BANCO BRADESCO Posto Assembleia  Seguros  Rosangela Rivas'),"
-          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Paula Sales Costa',  'null',  '3473-6001', 'BRADESCO PRIME - Assembleia  Gerente  Paula Sales Costa');",
+          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Fernanda Marques',  'null',  '3115-7009', 'BRADESCO PRIME - Assembleia  Gerente  Fernanda Marques'),"
+          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Raquel Castro',  'null',  '3473-6001', 'BRADESCO PRIME - Assembleia  Gerente  Raquel Castro');",
 
       //Todos os deputados --ATUALIZAÇÃO
       "CREATE TABLE $tabTodosDep ($idTodoDepCol	INTEGER PRIMARY KEY, $nomeParlaCol TEXT, "
@@ -1393,7 +1397,7 @@ class BdPlunge {
           "('Luís Vianna', 'Luís Vianna', '0000157', 'n', 'Luis Vianna'),"
           "('Luiz Argôlo', 'João Luiz Correia Argolo dos Santos', '907272', 'n', 'Joao Luiz Correia Argolo dos Santos'),"
           "('Luiz Athayde', 'Luiz Paulo Athayde', '5000370', 'n', 'Luiz Paulo Athayde'),"
-          "('Luiz Augusto', 'Luiz Augusto Gordiano de Moraes', '908909', 'n', 'Luiz Augusto Gordiano de Moraes'),"
+          "('Luiz Augusto', 'Luiz Augusto Gordiano de Moraes', '930496', 'n', 'Luiz Augusto Gordiano de Moraes'),"
           "('Luiz Bassuma', 'Luiz Carlos Bassuma', '5000363', 'n', 'Luiz Carlos Bassuma'),"
           "('Luiz Braga', 'Luiz Fernando Luz Braga', '5000368', 'n', 'Luiz Fernando Luz Braga'),"
           "('Luiz Caetano', 'Luiz Carlos Caetano', '5000003', 'n', 'Luiz Carlos Caetano'),"
@@ -1805,7 +1809,7 @@ class BdPlunge {
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Fabrício Falcão', 'm', 'PC do B', "
-          "'Anexo Nelson David Ribeiro - gab. 209', '3115-4079/3115-5295/3115-5296', "
+          "'Anexo Nelson David Ribeiro - gab. 209', '3115-7013/3115-5295/3115-5296', "
           "'fabriciofalcao@alba.ba.gov.br', 'fabriciofalcao.jpg', '915868');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
@@ -1874,6 +1878,11 @@ class BdPlunge {
           "'lucianosimoes.jpg', '921278');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
+          "VALUES ('Luiz Augusto', 'm', 'PP', 'Anexo Wilson Lins - gab. 305', "
+          "'3115-7169/3115-7021/3115-5311', 'laugusto@alba.ba.gov.br', "
+          "'luizaugusto.jpg', '930496');",
+      "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
+          " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Marcelinho Veiga', 'm', 'PSB', 'Anexo Wilson Lins - gab. 307', "
           "'3115-2923/3115-4092/3115-4908', 'depmveiga@alba.ba.gov.br', "
           "'marceloveiga.jpg', '926899');",
@@ -1897,11 +1906,6 @@ class BdPlunge {
           "VALUES ('Mirela Macedo', 'f', 'PSD', 'Anexo Wilson Lins - gab. 205', "
           "'3115-4099/3115-5219', 'mirelamacedo@alba.ba.gov.br', 'mirelamacedo.jpg', "
           "'923798');",
-      "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
-          " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
-          "VALUES ('Nelson Leal', 'm', 'PP', 'Anexo Wilson Lins - gab. 305', "
-          "'3115-5311/3115-7021/3115-7169', 'nleal@alba.ba.gov.br', "
-          "'nelsonleal.jpg', '903706');",
       "INSERT INTO $tabDep ($depNomeCol, $depSexoCol, $depPartCol,"
           " $depGabCol, $depTelCol, $depEmailCol, $depFotoCol, $depLinkCol) "
           "VALUES ('Neusa Lula Cadore', 'f', 'PT', 'Anexo Nelson David Ribeiro - gab. 305', "
@@ -2045,7 +2049,7 @@ class BdPlunge {
           "'Com. de Agricultura e Política Rural', 'Permanente', '3115-7215/3115-2913', "
           "'Sala Jadiel Matos', 'Terça-feira', '09h', 'Jusmari Oliveira', 'Sandro Régis', "
           "'Eduardo Salles/Jacó Lula da Silva/Neusa Lula Cadore/Tom Araújo/Vitor Bonfim/Zó', "
-          "'Aderbal Caldas/Antonio Henrique Jr./Osni Cardoso Lula da Silva/Paulo Câmara/Pedro Tavares/', 'Bruna de Souza Santana');",
+          "'Aderbal Caldas/Antonio Henrique Jr./Osni Cardoso Lula da Silva/Paulo Câmara/Pedro Tavares', 'Bruna de Souza Santana');",
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
@@ -2099,10 +2103,10 @@ class BdPlunge {
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
-          "'Com. de Ética e Decoro Parlamentar', 'Permanente', '3115-7235/3115-2909', 'null', "
-          "'null', 'null', 'Marquinho Viana', 'Sandro Régis', "
-          "'Euclides Fernandes/Luciano Simões Filho/Jurandy Oliveira/Bobô/Fabíola Mansur/Zé Raimundo Lula', "
-          "'Tiago Correia/Eduardo Alencar/Neusa Lula Cadore/Fátima Nunes Lula/Samuel Júnior/Vitor Bonfim/Eduardo Salles', 'null');",
+          "'Cons. de Ética e Decoro Parlamentar', 'Permanente', '3115-7235/3115-2909', 'Não Informado', "
+          "'Não Informado', 'Não Informado', 'Marquinho Viana', 'Sandro Régis', "
+          "'Euclides Fernandes/Luciano Simões Filho/Aderbal Caldas/Bobô/Fabíola Mansur/Zé Raimundo Lula', "
+          "'Tiago Correia/Eduardo Alencar/Neusa Lula Cadore/Fátima Nunes Lula/Samuel Júnior/Vitor Bonfim/Eduardo Salles', 'Não Informado');",
 
       //FIM DAS PERMANENTES INICIO DAS TEMPORARIAS
 
@@ -2143,8 +2147,8 @@ class BdPlunge {
           "$comissViceCol, $comissMembCol, $comissSupleCol, $comissAsseCol) VALUES ("
           "'Com. Especial de Desenvolvimento Regional', 'Temporária', '3115-7306/3115-7307', "
           "'Sala Herculano Menezes', 'Quarta-feira', '11h', 'Alex da Piatã', 'Tiago Correia', "
-          "'Antonio Henrique Jr./Capitão Alden/Fátima Nunes Lula/Olívia Santana/Roberto Carlos/Rogério Andrade Filho', "
-          "'Neusa Lula Cadore/Pedro Tavares/Zó', "
+          "'Antonio Henrique Jr./Capitão Alden/Fátima Nunes Lula/Olívia Santana/Roberto Carlos', "
+          "'Neusa Lula Cadore/Pedro Tavares/Rogério Andrade Filho/Zó', "
           "'Tania Maria da Silva Bispo');",
       "INSERT INTO $tabComiss ($comissNomeCol, $comissTipoCol, "
           "$comissTelCol, $comissLocCol, $comissDiaCol, $comissHoraCol, $comissPresCol,	"
@@ -2170,7 +2174,7 @@ class BdPlunge {
           "'Temporária', '3115-7110', 'Sala Jadiel Matos', "
           "'Quarta-feira', '11h', 'Angelo Almeida', 'Talita Oliveira', "
           "'Alex da Piatã/Fátima Nunes Lula/Jacó Lula da Silva/Mirela Macedo/Tiago Correia/Vitor Bonfim', "
-          "'José de Arimateia/Maria del Carmen Lula/Olivia Santana/Pastor Isidório Filho', 'Bruna de Souza Santana');",
+          "'Fabíola Mansur/José de Arimateia/Maria del Carmen Lula/Olivia Santana/Pastor Isidório Filho', 'Bruna de Souza Santana');",
 
       //FIM DAS COMISSOES ----- INICIO DA MESA DIRETORA
 
@@ -2271,7 +2275,7 @@ class BdPlunge {
       //PP - 9 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
           "$partLiderCol, $partViceCol, $partQtdCol) VALUES ('Bancada', "
-          "'Partido Progressista', 'PP', 'Eduardo Salles', 'Nelson Leal/Niltinho', 9);",
+          "'Partido Progressista', 'PP', 'Eduardo Salles', 'Luiz Augusto/Niltinho', 9);",
 
       //DEM - 5 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
@@ -2349,7 +2353,7 @@ class BdPlunge {
       //Bloco da Minoria - 18 deputados
       "INSERT INTO $tabPart ($partTipoCol, $partNomeCol, $partSiglaCol, "
           "$partLiderCol, $partViceCol, $partQtdCol) VALUES ('BlocoM', "
-          "'Bloco da Minoria', 'DEM/PSDB/PSC/PSL/Republicanos/MDB', 'Sandro Régis', "
+          "'Bloco da Minoria', 'DEM/PSDB/PSC/PSL/Republicanos/Patriota/MDB', 'Sandro Régis', "
           "'Carlos Geilson/Jurailton Santos/Tom Araújo', 18);",
 
       //Blocos partidários ------------
@@ -2396,7 +2400,7 @@ class BdPlunge {
           "('GABINETE DA PRESIDÊNCIA',  'Assessor de Relações Institucionais',  'Hermógenes Gomes Neto',  'null',  '3115-4906/3115-4965', 'GABINETE DA PRESIDENCIA  Assessor de Relacoes Institucionais  Hermogenes Gomes Neto'),"
           "('GABINETE DA PRESIDÊNCIA',  'Assessoria de Comunicação Presidencia',  'Nestor Mendes',  'null',  '3115-7334', 'GABINETE DA PRESIDENCIA  Assessoria de Comunicacao Presidencia  Nestor Mendes'),"
           "('PROCURADORIA GERAL',  'Procurador Geral',  'Graciliano Bomfim',  'pgeral@alba.ba.gov.br',  '3115-7241/3115-7168', 'PROCURADORIA GERAL  Procurador Geral  Graciliano Bomfim'),"
-          "('PROCURADORIA GERAL',  'Subprocurador Geral',  'Bianca Sena Hilarião',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Bianca Sena Hilariao'),"
+          "('PROCURADORIA GERAL',  'Subprocuradora Geral',  'Laura Duran(respondendo)',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Laura Duran'),"
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
           "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
@@ -2411,24 +2415,24 @@ class BdPlunge {
           "('FUNDAÇÃO PAULO JACKSON',  'Assessoria Jurídica',  'null', 'fpj-jur@alba.ba.gov.br', '3115-5480', 'FUNDACAO PAULO JACKSON Assessoria Juridica TV ALBA Radio'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Redação TV ALBA',  'null', 'tvalba@alba.ba.gov.br', '3115-5395', 'FUNDACAO PAULO JACKSON Redacao TV ALBA'),"
           "('ASSEMBLEIA DE CARINHO',  'Presidente',  'Denise Menezes',  'null',  '3115-4960/3115-5392', 'ASSEMBLEIA DE CARINHO  Presidente  Denise Menezes'),"
-          "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Francisco Raposo',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Francisco Raposo'),"
+          "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Superintendente',  'Robson José Coutinho Sousa',  'saf@alba.ba.gov.br',  '3115-7100/3115-4963', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Superintendente  Jose Coutinho Sousa Souza'),"
           "('SUPERINTENDÊNCIA DE ADMINISTRAÇÃO E FINANÇAS',  'Comissão Permanente de Licitação',  'Marcos Caires',  'cpl@alba.ba.gov.br',  '3115-7276/3115-5463', 'SUPERINTENDENCIA DE ADMINISTRACAO E FINANCAS  Comissao Permanente de Licitacao  Marcos Caires'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Diretor',  'Elias Dourado',  'da@alba.ba.gov.br',  '3115-7280/3115-7258', 'DIRETORIA ADMINISTRATIVA  Diretor  Elias Dourado'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Diretor',  'Júlio Eloy Passos Neto',  'da@alba.ba.gov.br',  '3115-7280/3115-7258', 'DIRETORIA ADMINISTRATIVA  Diretor  Julio Eloy Passos Neto'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Engenharia e Projetos',  'Tácio Borges Guimarães',  'sasem@alba.ba.gov.br',  '3115-7096', 'DIRETORIA ADMINISTRATIVA  Departamento de Engenharia e Projetos  Tacio Borges Guimaraes'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Departamento de Material e Patrimônio',  'Jovina Lúcia Santos da Silva',  'demap@alba.ba.gov.br',  '3115-4943', 'DIRETORIA ADMINISTRATIVA  Departamento de Material e Patrimonio  Jovina Lucia Santos da Silva'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Aquisição',  'Célia Braúna',  'aquisicao@alba.ba.gov.br',  '3115-7263', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Aquisicao  Celia Brauna'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Departamento de Material e Patrimônio',  'Rafael Portela',  'demap@alba.ba.gov.br',  '3115-4943', 'DIRETORIA ADMINISTRATIVA  Departamento de Material e Patrimonio  Rafael Portela'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Aquisição',  'Breno Sena',  'aquisicao@alba.ba.gov.br',  '3115-7263', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Aquisicao  Breno Sena'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Patrimônio',  'Marcos Vinicios Senna',  'patrimonio@alba.ba.gov.br',  '3115-7186', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Patrimonio  Marcos Vinicios Senna'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Almoxarifado',  'Adelson Palmeira',  'sad@alba.ba.gov.br',  '3115-7229', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Almoxarifado  Adelson Palmeira'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Almoxarifado',  'Rogério Ítalo Cardoso dos Santos',  'sad@alba.ba.gov.br',  '3115-7229', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Almoxarifado  Rogerio Italo Cardoso dos Santos'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Serviços Auxiliares',  'Rafael da Silva Brito',  'sadsa@alba.ba.gov.br',  '3115-4933', 'DIRETORIA ADMINISTRATIVA  Departamento de Servicos Auxiliares  Rafael da Silva Brito'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Segurança',  'Djalma Filho',  'seguranca.civil@alba.ba.gov.br',  '3115-4982', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Seguranca  Djalma Filho'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Transportes',  'a definir',  'satransp@alba.ba.gov.br',  '3115-7345', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Transportes  a definir'),"
           "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Manutenção',  'Gustavo Duran Brito',  'sasm@alba.ba.gov.br',  '3115-7179', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Manutencao  Gustavo Duran Brito'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Apoio Administrativo',  'José Valdemir',  'sadag@alba.ba.gov.br',  '3115-7046', 'DIRETORIA ADMINISTRATIVA  Departamento de Apoio Administrativo  Jose Valdemir'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Protocolo',  'Miriam Menezes',  'protocoloalba@alba.ba.gov.br',  '3115-7047', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Protocolo  Miriam Menezes'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'sasg@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
-          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Reginaldo Alves',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Reginaldo Alves'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Protocolo',  'Mirian Farias',  'protocoloalba@alba.ba.gov.br',  '3115-7047', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Protocolo Mirian  Miriam Farias'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Serviços Gráficos',  'Anderson Sena',  'coordgrafica@alba.ba.gov.br',  '3115-2967', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Servicos Graficos  Anderson Sena'),"
+          "('DIRETORIA ADMINISTRATIVA',  'Coordenação de Sonorização',  'Levino Costa Lima',  'sass@alba.ba.gov.br',  '3115-7164', 'DIRETORIA ADMINISTRATIVA  Coordenacao de Sonorizacao  Levino Costa Lima'),"
           "('DIRETORIA ADMINISTRATIVA',  'Departamento de Contratos e Convênios',  'Antonio Sancho',  'dasccc@alba.ba.gov.br',  '3115-7114', 'DIRETORIA ADMINISTRATIVA  Departamento de Contratos e Convenios  Antonio Sancho'),"
-          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'Robson José Coutinho Sousa',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor  Robson Jose Coutinho Sousa'),"
+          "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Diretor',  'a definir',  'def@alba.ba.gov.br',  '3115-4972', 'DIRETORIA DE ECONOMIA E FINANCAS  Diretor'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Departamento de Contabilidade',  'Laura Navarro',  'depcont@alba.ba.gov.br',  '3115-4971', 'DIRETORIA DE ECONOMIA E FINANCAS  Departamento de Contabilidade  Laura Navarro'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Análise Contábil',  'Fábio Lima',  'analisecontabil@alba.ba.gov.br',  '3115-5475', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Analise Contabil  Fabio Lima'),"
           "('DIRETORIA DE ECONOMIA E FINANÇAS',  'Coordenação de Registro Contábil',  'Maria do Perpétuo Sousa',  'sfsrc@alba.ba.gov.br',  '3115-4970', 'DIRETORIA DE ECONOMIA E FINANCAS  Coordenacao de Registro Contabil  Maria do Perpetuo Sousa'),"
@@ -2455,14 +2459,14 @@ class BdPlunge {
           "('SUPERINTENDÊNCIA DE ASSUNTOS PARLAMENTARES',  'Superintendente',  'Ivoneide Souza Caetano',  'sasp@alba.ba.gov.br',  '3115-7219', 'SUPERINTENDENCIA DE ASSUNTOS PARLAMENTARES  Superintendente  Ivoneide Souza Caetano'),"
           "('DIRETORIA LEGISLATIVA',  'Diretor',  'Clóvis Ferraz',  'dirlegis@alba.ba.gov.br',  '3115-7238', 'DIRETORIA LEGISLATIVA  Diretor  Clóvis Ferraz'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Atos Oficiais',  'Marize Bastos',  'atosoficiais@alba.ba.gov.br',  '3115-2915', 'DIRETORIA LEGISLATIVA  Departamento Atos Oficiais  Marize Bastos'),"
-          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Santos',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Carla Fernandes Santos',  'null',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Carla Fernandes Santos'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'sat@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
+          "('DIRETORIA LEGISLATIVA',  'Departamento de Taquigrafia',  'Marilanja Pereira',  'detaq@alba.ba.gov.br',  '3115-2902', 'DIRETORIA LEGISLATIVA  Departamento Taquigrafia  Marilanja Pereira'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apanhamento e Revisão',  'Mirela Novais',  'coare@alba.ba.gov.br',  '3115-2911', 'DIRETORIA LEGISLATIVA  Coordenacao Apanhamento Revisao  Mirela Novais'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Apoio Taquigráfico',  'Vera Simões',  'coara@alba.ba.gov.br',  '3115-2919', 'DIRETORIA LEGISLATIVA  Coordenacao Apoio Taquigrafico  Vera Simoes'),"
           "('DIRETORIA LEGISLATIVA',  'Departamento de Controle do Processo Legislativo',  'Licéa Santos',  'dcpl@alba.ba.gov.br',  '3115-7113', 'DIRETORIA LEGISLATIVA  Departamento de Controle do Processo Legislativo  Licea Santos'),"
           "('DIRETORIA LEGISLATIVA',  'Coordenação de Registro',  'Andréa Velloso',  'null',  '3115-2916', 'DIRETORIA LEGISLATIVA  Coordenacao de Registro  Andrea Velloso'),"
-          "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Gesilmara Almeida',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Gesilmara Almeida'),"
+          "('DIRETORIA LEGISLATIVA',  'Coordenação de Expediente',  'Marjorie Fontes',  'expediente@alba.ba.gov.br',  '3115-7194', 'DIRETORIA LEGISLATIVA  Coordenacao de Expediente  Marjorie Fontes'),"
           "('DIRETORIA PARLAMENTAR',  'Diretor',  'Geraldo Mascarenhas',  'dpa@alba.ba.gov.br',  '3115-7274', 'DIRETORIA PARLAMENTAR  Diretor  Geraldo Mascarenhas'),"
-          "('DIRETORIA PARLAMENTAR',  'Departamento de Documentação e Informação ',  'Tânia Queiroz ',  'bib@alba.ba.gov.br',  '3115-4973', 'DIRETORIA PARLAMENTAR  Departamento de Documentacao e Informacao   Tania Queiroz'),"
+          "('DIRETORIA PARLAMENTAR',  'Departamento de Documentação e Informação ',  'Tânia Queiroz',  'bib@alba.ba.gov.br',  '3115-4973', 'DIRETORIA PARLAMENTAR  Departamento de Documentacao e Informacao Tania Queiroz'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Biblioteca',  'Iracilda Nunes',  'bib@alba.ba.gov.br',  '3115-5229', 'DIRETORIA PARLAMENTAR  Coordenacao de Biblioteca  Iracilda Nunes'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Anais',  'Dora Maria Silva',  'anais@alba.ba.gov.br',  '3115-7220', 'DIRETORIA PARLAMENTAR  Coordenacao de Anais  Dora Maria Silva'),"
           "('DIRETORIA PARLAMENTAR',  'Coordenação de Arquivo Geral e Microfilmagem',  'Raquel Machado',  'arquivogeral@alba.ba.gov.br',  '3115-7112', 'DIRETORIA PARLAMENTAR  Coordenacao de Arquivo Geral e Microfilmagem  Raquel Machado'),"
@@ -2474,6 +2478,7 @@ class BdPlunge {
           "('DIVERSOS',  'Grupo Editorial',  'null',  'null',  '3115-7243', 'DIVERSOS  Grupo Editorial'),"
           "('DIVERSOS',  'Assalba',  'null',  'null',  '3115-2962/3115-7038', 'DIVERSOS  Assalba'),"
           "('DIVERSOS',  'Central Telefônica',  'null',  'null',  '3115-7399/3115-7268', 'DIVERSOS  Central Telefonica'),"
+          "('DIVERSOS',  'Central Celular',  'null',  'null',  '3115-5260/3115-4944', 'DIVERSOS  Central Celular'),"
           "('DIVERSOS',  'Comitê de Imprensa',  'null',  'null',  '3115-7117', 'DIVERSOS  Comite de Imprensa'),"
           "('DIVERSOS',  'Copa - 1º andar Presidência',  'null',  'null',  '3115-7224', 'DIVERSOS  Copa - 1º andar Presidencia'),"
           "('DIVERSOS',  'Copa - 3º andar',  'null',  'null',  '3115-7204', 'DIVERSOS  Copa - 3º andar'),"
@@ -2483,20 +2488,23 @@ class BdPlunge {
           "('DIVERSOS',  'Lanchonete',  'null',  'null',  '3115-7232', 'DIVERSOS  Lanchonete'),"
           "('DIVERSOS',  'Plenário',  'null',  'null',  '3115-7115', 'DIVERSOS  Plenario'),"
           "('DIVERSOS',  'Saguão do Plenário',  'null',  'null',  '3115-7284', 'DIVERSOS  Saguao do Plenario'),"
-          "('DIVERSOS',  'Sala de Estar (cafezinho)',  'null',  'null',  '3115-7290', 'DIVERSOS  Sala de Estar (cafezinho)'),"
-          "('DIVERSOS',  'Tribuna de Imprensa',  'null',  'null',  '3115-7273', 'DIVERSOS  Tribuna de Imprensa'),"
-          "('DIVERSOS',  'Salão Verde',  'null',  'null',  '3115-7134', 'DIVERSOS  Salao Verde'),"
+          "('DIVERSOS',  'Sala de Estar (cafezinho)',  'null',  'null',  '3115-7290', 'DIVERSOS plenario Sala de Estar (cafezinho)'),"
+          "('DIVERSOS',  'Copa',  'null',  'null',  '3115-4046', 'DIVERSOS  Copa plenario'),"
+          "('DIVERSOS',  'Tribuna de Imprensa',  'null',  'null',  '3115-7273', 'DIVERSOS plenario Tribuna de Imprensa'),"
+          "('DIVERSOS',  'Salão Verde',  'null',  'null',  '3115-7134', 'DIVERSOS plenario Salao Verde'),"
           "('DIVERSOS',  'Salão Nobre',  'null',  'null',  '3115-7162', 'DIVERSOS  Salao Nobre'),"
           "('DIVERSOS',  'Portaria de Correspondência',  'null',  'null',  '3115-7111', 'DIVERSOS  Portaria de Correspondencia'),"
-          "('DIVERSOS',  'Portaria - Recepção',  'null',  'null',  '3115-7116/3115-7102', 'DIVERSOS  Portaria - Recepcao'),"
+          "('DIVERSOS',  'Portaria - Recepção',  'null',  'null',  '3115-7116/3115-7102', 'DIVERSOS  Portaria Recepcao'),"
           "('DIVERSOS',  'Refeitório',  'null',  'null',  '3115-7329', 'DIVERSOS  Refeitorio'),"
-          "('DIVERSOS',  'Restaurante A La Carte',  'null',  'null',  '3115-7314', 'DIVERSOS  Restaurante A La Carte'),"
+          "('DIVERSOS',  'Restaurante A La Carte',  'null',  'null',  '3115-7314', 'DIVERSOS  Restaurante Carte'),"
           "('DIVERSOS',  'Salão de Beleza',  'null',  'null',  '3115-5496', 'DIVERSOS  Salao de Beleza'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Agda Paiva',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Gerente  Agda Paiva'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Delma Ribeiro',  'null',  '3115-7146', 'BANCO BRADESCO Posto Assembleia  Gerente  Delma Ribeiro'),"
-          "('BANCO BRADESCO Posto Assembleia',  'Sala Vip',  'null',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Sala Vip'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Agda Paiva',  'null',  '3115-4056', 'BANCO BRADESCO Posto Assembleia  Gerente  Agda Paiva'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Tais Gomes',  'null',  '3115-7146', 'BANCO BRADESCO Posto Assembleia  Gerente  Tais Gomes'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Gerente',  'Felipe Barbosa',  'null',  '3115-7359', 'BANCO BRADESCO Posto Assembleia  Gerente  Felipe Barbosa'),"
+          "('BANCO BRADESCO Posto Assembleia',  'Sala Vip',  'null',  'null',  '3115-7128', 'BANCO BRADESCO Posto Assembleia  Sala Vip'),"
           "('BANCO BRADESCO Posto Assembleia',  'Seguros',  'Rosângela Rivas',  'null',  '3115-4056', 'BANCO BRADESCO Posto Assembleia  Seguros  Rosangela Rivas'),"
-          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Paula Sales Costa',  'null',  '3473-6001', 'BRADESCO PRIME - Assembleia  Gerente  Paula Sales Costa');",
+          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Fernanda Marques',  'null',  '3115-7009', 'BRADESCO PRIME - Assembleia  Gerente  Fernanda Marques'),"
+          "('BRADESCO PRIME - Assembleia',  'Gerente',  'Raquel Castro',  'null',  '3473-6001', 'BRADESCO PRIME - Assembleia  Gerente  Raquel Castro');",
 
       //Todos os deputados
       "CREATE TABLE $tabTodosDep ($idTodoDepCol	INTEGER PRIMARY KEY, $nomeParlaCol TEXT, "
@@ -2928,7 +2936,7 @@ class BdPlunge {
           "('Luís Vianna', 'Luís Vianna', '0000157', 'n', 'Luis Vianna'),"
           "('Luiz Argôlo', 'João Luiz Correia Argolo dos Santos', '907272', 'n', 'Joao Luiz Correia Argolo dos Santos'),"
           "('Luiz Athayde', 'Luiz Paulo Athayde', '5000370', 'n', 'Luiz Paulo Athayde'),"
-          "('Luiz Augusto', 'Luiz Augusto Gordiano de Moraes', '908909', 'n', 'Luiz Augusto Gordiano de Moraes'),"
+          "('Luiz Augusto', 'Luiz Augusto Gordiano de Moraes', '930496', 'n', 'Luiz Augusto Gordiano de Moraes'),"
           "('Luiz Bassuma', 'Luiz Carlos Bassuma', '5000363', 'n', 'Luiz Carlos Bassuma'),"
           "('Luiz Braga', 'Luiz Fernando Luz Braga', '5000368', 'n', 'Luiz Fernando Luz Braga'),"
           "('Luiz Caetano', 'Luiz Carlos Caetano', '5000003', 'n', 'Luiz Carlos Caetano'),"

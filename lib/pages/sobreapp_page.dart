@@ -372,7 +372,7 @@ class _PlaceSobreAppWidgetState extends State<PlaceSobreAppWidget> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text("Francisco Raposo (interino)",
+                                    Text("Robson José Coutinho Sousa",
                                       style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                                     ),
                                   ],

@@ -39,3 +39,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# arquivos proprios
+keystore.jks
+uploadtico_certificate.pem
