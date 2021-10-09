@@ -4,11 +4,11 @@ import 'package:alba_app/pages/noticias_page.dart';
 import 'package:alba_app/pages/pesq_telefones_page.dart';
 import 'package:alba_app/pages/telefones_page.dart';
 import 'package:alba_app/pages/todosdep_page.dart';
+import 'package:alba_app/presentation/custom_icons_icons.dart';
 import 'package:alba_app/splashscreen.dart';
 import 'package:alba_app/utils/news_api.dart';
 import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:alba_app/presentation/custom_icons_icons.dart';
 
 class HomePage extends StatefulWidget {
   HomePage();

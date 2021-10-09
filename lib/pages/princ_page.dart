@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alba_app/helpers/controle_helper.dart';
 import 'package:alba_app/helpers/usuario_helper.dart';
 import 'package:alba_app/models/controle_model.dart';
@@ -6,13 +8,9 @@ import 'package:alba_app/pages/home_page.dart';
 import 'package:alba_app/pages/mais_page.dart';
 import 'package:alba_app/pages/tel_page.dart';
 import 'package:alba_app/utils/news_api.dart';
-import 'package:alba_app/utils/version_api.dart';
 import 'package:alba_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:rate_my_app/rate_my_app.dart';
-import 'dart:io';
-
 import 'package:url_launcher/url_launcher.dart';
 
 class PrincPage extends StatefulWidget {
@@ -35,8 +33,8 @@ class _PrincPageState extends State<PrincPage> {
   //Variaveis para teste do banco
   UsuarioHelper helper = UsuarioHelper();
   NewsApi news = NewsApi();
-  PackageInfo packageInfo;
-  VersionMyApp _versionMyApp = VersionMyApp();
+  //PackageInfo packageInfo;
+  //VersionMyApp _versionMyApp = VersionMyApp();
   ControleModel controle = ControleModel();
   ControleHelper controleHelper = ControleHelper();
   var hoje = DateTime.now();
@@ -52,11 +50,13 @@ class _PrincPageState extends State<PrincPage> {
         controle = value;
       }
     });
+    /*
     PackageInfo.fromPlatform().then((value) {
       if(value != null){
         packageInfo = value;
       }
     });
+     */
     _rateMyApp.init().then((_) {
       print("O PRINT DO RATE É ESSE "+ _rateMyApp.shouldOpenDialog.toString());
       if(_rateMyApp.shouldOpenDialog){
@@ -91,17 +91,18 @@ class _PrincPageState extends State<PrincPage> {
           onDismissed: () =>
               _rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
         );
-      }else if(packageInfo != null && controle != null){
+      }/*else if(packageInfo != null && controle != null){
         print("Voltou estou no init " + packageInfo.version.toString());
-        bool test;
+       // bool test;
         String versAtual = packageInfo.version.toString();
-        test = _versionMyApp.verificaVersao(versAtual);
+        //test = _versionMyApp.verificaVersao(versAtual);
         print("Proxima verific que volta do bd " + controle.proximaVerifc);
         var dia = DateTime.parse(controle.proximaVerifc);
-        if(test == true && hoje.compareTo(dia) >= 0){
-          showPackageInfo();
-        }
+        //if(test == true && hoje.compareTo(dia) >= 0){
+        //  showPackageInfo();
+       // }
       }
+      */
     });
     news.loadNews().then((value){});
   }

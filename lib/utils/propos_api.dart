@@ -14,8 +14,10 @@ class PropositionApi {
   String dataIni = "";
   String dataFim = "";
   String link;
+  int max;
   int banco;
   var pagHtml;
+  String pg;
 
   // ignore: missing_return
   Future<List> loadProposic({int filtro, String valor, int bancoPesq}) async {
@@ -26,7 +28,6 @@ class PropositionApi {
       banco = 2;
     }
 
-
     switch(filtro){
       case 1:
         valor = valor.replaceAll("/", "%2F");
@@ -36,15 +37,17 @@ class PropositionApi {
         porTipo = valor;
         break;
       case 3:
-        if(valor == "66") {
+        if(valor == "4105" && banco == 2) {
           porExec = valor;
+        }else if(valor == "4105" && banco == 1) {
+          porExec = "66";
         }else {
           porDep = valor;
         }
         break;
       default:
         DateTime dataHoje = DateTime.now();
-        DateTime data90 = dataHoje.add(new Duration(days: -90));
+        DateTime data90 = dataHoje.add(new Duration(days: -180));
         DateTime data19Jan = DateTime(2021, 1, 19, 0, 0, 0, 0);
         DateTime dt90;
         int result = data90.compareTo(data19Jan);
@@ -68,39 +71,83 @@ class PropositionApi {
       pagHtml = "/atividade-legislativa/proposicoes?numero=$porNumero&palavra=&tipo=$porTipo&deputado=$porDep&exDeputado=&outros=$porExec&dataInicio=$dataIni&dataFim=$dataFim";
     }
 
+    //determina o numero de páginas resultante da buscada busca
+    if(await webScraperLiv.loadWebPage(pagHtml+"&page=0&size=20")){
+      List<Map<String, dynamic>> numberOfPag =
+      webScraperLiv.getElement('ul.pagination > li > a.paginate-button-next.fe-mobile-hide', ['href']);
 
-    if(await webScraperLiv.loadWebPage(pagHtml)){
-      List<Map<String, dynamic>> elements1 =
-      webScraperLiv.getElement("button.btn.fe-btn-alba.fe-btn-min-r.fe-center-x > span", [""]); //num
-      List<Map<String, dynamic>> elements2 =
-      webScraperLiv.getElement("tr.table-itens > td > span", [""]); // ementa
-
-      print("O tamanho da lista 1 é: ${elements1.length}");
-
-      if(elements1.length > 0){
-
-        for(int i =0; i < elements2.length; i++) {
-          ProposicaoModel proposi = ProposicaoModel();
-
-          var descr = elements2[i]["title"];
-          String ement = (descr.toString()).trim();
-
-          var numProp = elements1[i]["title"];
-          String numerProposi = (numProp.toString()).trim();
-          String end = numerProposi.replaceAll("/", "-");
-          link = "$htmlAlba/atividade-legislativa/proposicao/$end";
-
-          proposi.linkProposi = link;
-          proposi.ementProposi = ement;
-          proposi.numerProposi = numerProposi;
-
-          proposiList.add(proposi);
-        }
-        return proposiList;
-      }else{
-        return null;
+      var numPag = numberOfPag[0]['attributes'];
+      print("numero de página que vem no scraper ${numberOfPag[0]['attributes']}");
+      String pagina = (numPag.toString()).trim();
+      print("A informação trabalhada ${pagina}");
+      int c = pagina.length;
+      for(int i = 0; i < c-6; i++){
+          if(pagina.substring(i, i+6) == "&page="){
+            pg = pagina.substring(i+6, (pagina.length - 9));
+          }
+      }
+      max = int.parse(pg);
+      if(max > 4){
+        max = 4;
       }
     }
-  }
 
+    //inicia a busca das proposições para a lista
+
+    for(int pag = 0; pag <= max; pag++){
+
+      ProposicaoModel proposi = ProposicaoModel();
+
+      print("o numero da pagina pesquisado é: ${pag}");
+      String pagHtml2 = pagHtml+"&page=$pag&size=20";
+      if(await webScraperLiv.loadWebPage(pagHtml2)){
+        print("o link de pesquisa${pagHtml2}");
+        List<Map<String, dynamic>> elements1 =
+        webScraperLiv.getElement("button.btn.fe-btn-alba.fe-btn-min-r.fe-center-x > span", [""]); //num
+        List<Map<String, dynamic>> elements2 =
+        webScraperLiv.getElement("tr.table-itens > td > span", [""]); // ementa
+        List<String> elements3 =
+        webScraperLiv.getElementAttribute("tr.table-itens > td > a", "href");//link
+
+        print("O tamanho da lista 1 é: ${elements1.length}");
+        print("O tamanho da lista 3 é: ${elements3.length}");
+
+        for(int i = 0; i <elements3.length; i++){
+          String teste = elements3[i];
+          if(teste.startsWith("http://") || teste.startsWith("/fserver/:")){
+            elements3.removeAt(i);
+            print("Elemento removido");
+          }
+        }
+
+        print("O novo tamanho da lista 3 é: ${elements3.length}");
+
+        if(elements1.length > 0){
+
+          for(int i =0; i < elements2.length; i++) {
+
+            var descr = elements2[i]["title"];
+            String ement = (descr.toString()).trim();
+
+            var numProp = elements1[i]["title"];
+            String numerProposi = (numProp.toString()).trim();
+            print("O numero da proposição é: ${numerProposi}");
+            //String end = numerProposi.replaceAll("/", "-");
+            String end = elements3[i];
+            //link = "$htmlAlba/atividade-legislativa/proposicao/$end";
+            link = htmlAlba+end;
+            print("O links é: ${link}");
+            proposi.linkProposi = link;
+            proposi.ementProposi = ement;
+            proposi.numerProposi = numerProposi;
+
+            proposiList.add(proposi);
+          }
+        }else{
+          proposiList = null;
+        }
+      }
+    }
+    return proposiList;
+  }
 }

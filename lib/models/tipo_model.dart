@@ -12,7 +12,7 @@ class TipoForForm {
   static List<String> getTipo() {
     return <String> [
       'IND', 'MOC', 'PL.', 'EME', 'MSG', 'OF.',
-      'PRS', 'PDL', 'PLC', 'REQ', 'PEC', 'RES',
+      'PRS', 'PDL', 'PLC', 'REQ', 'REP', 'PEC', 'RES',
     ];
   }
 }

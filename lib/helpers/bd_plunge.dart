@@ -1,5 +1,5 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 //Tabelas e respectivos campos
@@ -910,7 +910,7 @@ class BdPlunge {
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Administração de Pessoal',  'Cláudio Santana',  'srhdap@alba.ba.gov.br',  '3115-7305', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Administracao de Pessoal  Claudio Santana'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Coordenação de Movimentação de Pessoal',  'Juliana Nadjara',  'srh_scc@alba.ba.gov.br',  '3115-5458', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Coordenacao de Movimentacao de Pessoal  Juliana Nadjara'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Coordenação de Pagamento de Pessoal',  'Evely Gabriel',  'srhscp@alba.ba.gov.br',  '3115-7121', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Coordenacao de Pagamento de Pessoal  Evely Gabriel'),"
-          "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Serviço Social',  'Daniela Faria',  'desesalba@alba.ba.gov.br',  '3115-7123', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Servico Social  Daniela Faria'),"
+          "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Serviço Social',  'Lais Paulo de Jesus',  'desesalba@alba.ba.gov.br',  '3115-7123', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Servico Social  Lais Paulo de Jesus'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Diretora',  'Patrícia Nora ',  'smo@alba.ba.gov.br',  '3115-7324', 'DIRETORIA DE PROMOCAO A SAUDE  Diretora  Patricia Nora'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Coordenação Técnica',  'Rodrigo Vasco da Gama',  'null',  '3115-7332/3115-4107', 'DIRETORIA DE PROMOCAO A SAUDE  Coordenacao Tecnica  Rodrigo Vasco da Gama'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Coordenação de Nutrição',  'Terezinha Raposo',  'nutricao@alba.ba.gov.br',  '3115-7174', 'DIRETORIA DE PROMOCAO A SAUDE  Coordenacao de Nutricao  Terezinha Raposo'),"
@@ -2403,7 +2403,7 @@ class BdPlunge {
           "('PROCURADORIA GERAL',  'Subprocuradora Geral',  'Laura Duran(respondendo)',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Laura Duran'),"
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
-          "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
+          "('AUDITORIA',  'Auditor Chefe',  'a definir',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
           "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola da Cunha',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola cunha'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fpj-dg@alba.ba.gov.br',  '3115-2935', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis TV ALBA TVALBA'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Secretária da Dir Geral',  'Cheila Braga', 'null', '3115-2935', 'FUNDACAO PAULO JACKSON Cheila Braga Diretoria Geral Secretaria TV ALBA Radio'),"
@@ -2449,7 +2449,7 @@ class BdPlunge {
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Administração de Pessoal',  'Cláudio Santana',  'srhdap@alba.ba.gov.br',  '3115-7305', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Administracao de Pessoal  Claudio Santana'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Coordenação de Movimentação de Pessoal',  'Juliana Nadjara',  'srh_scc@alba.ba.gov.br',  '3115-5458', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Coordenacao de Movimentacao de Pessoal  Juliana Nadjara'),"
           "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Coordenação de Pagamento de Pessoal',  'Evely Gabriel',  'srhscp@alba.ba.gov.br',  '3115-7121', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Coordenacao de Pagamento de Pessoal  Evely Gabriel'),"
-          "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Serviço Social',  'Daniela Faria',  'desesalba@alba.ba.gov.br',  '3115-7123', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Servico Social  Daniela Faria'),"
+          "('SUPERINTENDÊNCIA DE RECURSOS HUMANOS',  'Departamento de Serviço Social',  'Lais Paulo de Jesus',  'desesalba@alba.ba.gov.br',  '3115-7123', 'SUPERINTENDENCIA DE RECURSOS HUMANOS  Departamento de Servico Social  Lais Paulo de Jesus'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Diretora',  'Patrícia Nora ',  'smo@alba.ba.gov.br',  '3115-7324', 'DIRETORIA DE PROMOCAO A SAUDE  Diretora  Patricia Nora'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Coordenação Técnica',  'Rodrigo Vasco da Gama',  'null',  '3115-7332/3115-4107', 'DIRETORIA DE PROMOCAO A SAUDE  Coordenacao Tecnica  Rodrigo Vasco da Gama'),"
           "('DIRETORIA DE PROMOÇÃO À SAÚDE',  'Coordenação de Nutrição',  'Terezinha Raposo',  'nutricao@alba.ba.gov.br',  '3115-7174', 'DIRETORIA DE PROMOCAO A SAUDE  Coordenacao de Nutricao  Terezinha Raposo'),"

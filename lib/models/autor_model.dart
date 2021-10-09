@@ -72,8 +72,8 @@ class AutorForForm {
       case "Jacó Lula da Silva":
         x = 417;
         break;
-      case "Janio Natal":
-        x = 208;
+      case "Josafá Marinho":
+        x = 4001;
         break;
       case "José de Arimateia":
         x = 212;
@@ -104,9 +104,6 @@ class AutorForForm {
         break;
       case "Marcelino Galo Lula":
         x = 359;
-        break;
-      case "Marcell dos Animais":
-        x = 384;
         break;
       case "Maria del Carmen Lula":
         x = 287;
@@ -145,7 +142,7 @@ class AutorForForm {
         x = 363;
         break;
       case "Poder Executivo":
-        x = 66;
+        x = 4105;
         break;
       case "Roberto Carlos":
         x = 46;
@@ -174,17 +171,11 @@ class AutorForForm {
       case "Talita Oliveira":
         x = 432;
         break;
-      case "Targino Machado":
-        x = 54;
-        break;
       case "Tiago Correia":
         x = 435;
         break;
       case "Tom Araújo":
         x = 367;
-        break;
-      case "Tom é Meu Amigo":
-        x = 428;
         break;
       case "Tum":
         x = 433;
@@ -192,14 +183,26 @@ class AutorForForm {
       case "Vitor Bonfim":
         x = 395;
         break;
-      case "Zé Cocá":
-        x = 434;
-        break;
       case "Zé Raimundo Lula":
         x = 354;
         break;
       case "Zó":
         x = 400;
+        break;
+      case "Angelo Almeida":
+        x = 4109;
+        break;
+      case "Bira Corôa Lula":
+        x = 4117;
+        break;
+      case "Carlos Geilson":
+        x = 4112;
+        break;
+      case "Carlos Ubaldino":
+        x = 4120;
+        break;
+      case "Luiz Augusto":
+        x = 4124;
         break;
     }
     return x;
@@ -208,18 +211,19 @@ class AutorForForm {
   static List<String> getAutorString(){
     return <String>[
       "Aderbal Caldas", "Adolfo Menezes", "Alan Castro",  "Alan Sanches", "Alex da Piatã",
-      "Alex Lima", "Antonio Henrique Junior", "Bobô", "Capitão Alden", "Dal", "David Rios",
+      "Alex Lima", "Angelo Almeida", "Antonio Henrique Junior", "Bira Corôa Lula", "Bobô",
+      "Capitão Alden", "Carlos Geilson", "Carlos Ubaldino", "Dal", "David Rios",
       "Diego Coronel", "Eduardo Alencar", "Eduardo Salles", "Euclides Fernandes", "Fabíola Mansur",
       "Fabrício Falcão", "Fátima Nunes Lula",  "Hilton Coelho", "Ivana Bastos", "Jacó Lula da Silva",
-      "Janio Natal", "José de Arimateia", "Júnior Muniz", "Jurailton Santos", "Jurandy Oliveira",
-      "Jusmari Oliveira", "Kátia Oliveira", "Laerte do Vando", "Luciano Simões Filho", "Marcelinho Veiga",
-      "Marcelino Galo Lula", "Marcell dos Animais", "Maria del Carmen Lula", "Marquinho Viana",
+      "Josafá Marinho", "José de Arimateia", "Júnior Muniz", "Jurailton Santos", "Jurandy Oliveira",
+      "Jusmari Oliveira", "Kátia Oliveira", "Laerte do Vando", "Luciano Simões Filho", "Luiz Augusto",
+      "Marcelinho Veiga", "Marcelino Galo Lula", "Maria del Carmen Lula", "Marquinho Viana",
       "Mirela Macedo", "Nelson Leal", "Neusa Lula Cadore", "Niltinho", "Olivia Santana",
       "Osni Cardoso Lula da Silva", "Pastor Isidório Filho", "Paulo Câmara", "Paulo Rangel Lula da Silva",
       "Pedro Tavares", "Poder Executivo", "Roberto Carlos", "Robinho", "Robinson Almeida Lula",
       "Rogério Andrade Filho", "Rosemberg Lula Pinto", "Samuel Júnior", "Sandro Régis", "Soldado Prisco",
-      "Talita Oliveira", "Targino Machado", "Tiago Correia", "Tom Araújo", "Tom é Meu Amigo", "Tum",
-      "Vitor Bonfim", "Zé Cocá", "Zé Raimundo Lula", "Zó",
+      "Talita Oliveira", "Tiago Correia", "Tom Araújo", "Tum",
+      "Vitor Bonfim", "Zé Raimundo Lula", "Zó",
     ];
   }
 }

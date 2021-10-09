@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:alba_app/helpers/noticia_helper.dart';
 import 'package:alba_app/models/noticia_model.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlaceNoticiaWidget extends StatefulWidget {
   PlaceNoticiaWidget();

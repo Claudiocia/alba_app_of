@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:alba_app/helpers/livro_helper.dart';
 import 'package:alba_app/models/livro_model.dart';
 import 'package:web_scraper/web_scraper.dart';
-
-import 'dart:async';
 
 class LivrosApiBd {
   LivrosApiBd();
@@ -24,8 +24,11 @@ class LivrosApiBd {
       webScraperLiv.getElement('ul.pagination > li > a.paginate-button-next.fe-mobile-hide', ['href']);
 
       var numPag = numberOfPag[0]['attributes'];
+      //print("numero de página que vem no scraper ${numberOfPag[0]['attributes']}");
       String pagina = (numPag.toString()).trim();
+      //print("A informação trabalhada = a ${pagina}");
       max = int.parse(pagina.substring(40, (pagina.length - 9)));
+      //print("valor denominado como max é ${max}");
 
     }
 
