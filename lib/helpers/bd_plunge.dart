@@ -117,8 +117,8 @@ class BdPlunge {
     if (dbAlb != null) {
       _version = await dbAlb.getVersion();
 
-      if(_version <= 7 ){
-        dbAlb = await updateDb(dbAlb, _version, 8);
+      if(_version <= 8 ){
+        dbAlb = await updateDb(dbAlb, _version, 9);
         return dbAlb;
       }else{
         return dbAlb;
@@ -135,7 +135,7 @@ class BdPlunge {
 
     List<String> listQueries = formQueries();
 
-    return await openDatabase(path, version: 8,
+    return await openDatabase(path, version: 9,
         onCreate: (Database db, int newerVersion) async {
           for (String query in listQueries) {
             await db.execute(query);
@@ -153,6 +153,7 @@ class BdPlunge {
     await db.execute("DROP TABLE IF EXISTS $tabPart;");
     await db.execute("DROP TABLE IF EXISTS $tabTodosDep;");
     await db.execute("DROP TABLE IF EXISTS $tabControle;");
+    await db.execute("DROP TABLE IF EXISTS $tabLivros;");
 
     for (int i = 0; i < listQueriesAtualiz.length; i++) {
       String queryAtualiz = listQueriesAtualiz[i];
@@ -165,6 +166,11 @@ class BdPlunge {
 
   List<String> formQueriesAtualiz() {
     List<String> queryesAtualiz = [
+
+      "CREATE TABLE $tabLivros ($idLivroCol INTEGER PRIMARY KEY, $titLivroCol TEXT, "
+          "$linkLivroCol TEXT, $capaLivroCol TEXT, $edtLivroCol TEXT, $autorLivroCol TEXT, "
+          "$publicLivroCol TEXT, $formatLivroCol TEXT, $resumLivroCol TEXT, $isbnLivroCol TEXT, "
+          "$fonteLivroCol TEXT, $dataBancoCol TEXT, $numPagCol INTEGER);",
 
       "CREATE TABLE $tabDep ($depIdCol	INTEGER PRIMARY KEY, $depNomeCol TEXT, "
           "$depSexoCol TEXT, $depPartCol TEXT, $depGabCol TEXT, $depTelCol TEXT, "
@@ -864,8 +870,8 @@ class BdPlunge {
           "('PROCURADORIA GERAL',  'Subprocuradora Geral',  'Laura Duran(respondendo)',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Laura Duran'),"
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
-          "('AUDITORIA',  'Auditor Chefe',  'Paulo Tannus Freitas',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
-          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola da Cunha',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola cunha'),"
+          "('AUDITORIA',  'Auditor Chefe',  'Ailton Cezarino de Novaes',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Ailton Cezarino de Novaes'),"
+          "('AUDITORIA',  'Auditor Adjunto',  'Pablo Oliveira e Silva',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Pablo Oliveira e Silva'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fpj-dg@alba.ba.gov.br',  '3115-2935', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis TV ALBA TVALBA'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Secretária da Dir Geral',  'Cheila Braga', 'null', '3115-2935', 'FUNDACAO PAULO JACKSON Cheila Braga Diretoria Geral Secretaria TV ALBA Radio'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Diretoria Administrativa e Financeira',  'Almir Pereira dos Santos', 'fpj-daf@alba.ba.gov.br', '3115-5478', 'FUNDACAO PAULO JACKSON Diretoria Administrativa Financeira Almir Pereira dos Santos TV ALBA TVALBA'),"
@@ -2403,8 +2409,8 @@ class BdPlunge {
           "('PROCURADORIA GERAL',  'Subprocuradora Geral',  'Laura Duran(respondendo)',  'null',  '3115-7397', 'PROCURADORIA GERAL  Subprocurador Geral  Laura Duran'),"
           "('ASSESSORIA DE COMUNICAÇÃO SOCIAL',  'Chefe da Assessoria',  'Paulo Bina',  'ascom@alba.ba.gov.br',  '3115-4958/3115-4959', 'ASSESSORIA DE COMUNICACAO SOCIAL  Chefe da Assessoria  Paulo Bina'),"
           "('ASSESSORIA DE PLANEJAMENTO',  'Chefe da Assessoria',  'Ricardo Chagas de Abreu',  'asplan@alba.ba.gov.br',  '3115-7299/3115-4955', 'ASSESSORIA DE PLANEJAMENTO  Chefe da Assessoria  Ricardo Chagas de Abreu'),"
-          "('AUDITORIA',  'Auditor Chefe',  'a definir',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Paulo Tannus Freitas'),"
-          "('AUDITORIA',  'Auditor Adjunto',  'Antônio Carlos Spínola da Cunha',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Antonio Carlos Spinola cunha'),"
+          "('AUDITORIA',  'Auditor Chefe',  'Ailton Cezarino de Novaes',  'auditoria@alba.ba.gov.br',  '3115-4983/3115-2988', 'AUDITORIA  Auditor Chefe  Ailton Cezarino de Novaes'),"
+          "('AUDITORIA',  'Auditor Adjunto',  'Pablo Oliveira e Silva',  'null',  '3115-7341', 'AUDITORIA  Auditor Adjunto  Pablo Oliveira e Silva'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Diretora Geral',  'Michele Gramacho Reis',  'fpj-dg@alba.ba.gov.br',  '3115-2935', 'FUNDACAO PAULO JACKSON  Diretora Geral  Michele Gramacho Reis TV ALBA TVALBA'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Secretária da Dir Geral',  'Cheila Braga', 'null', '3115-2935', 'FUNDACAO PAULO JACKSON Cheila Braga Diretoria Geral Secretaria TV ALBA Radio'),"
           "('FUNDAÇÃO PAULO JACKSON',  'Diretoria Administrativa e Financeira',  'Almir Pereira dos Santos', 'fpj-daf@alba.ba.gov.br', '3115-5478', 'FUNDACAO PAULO JACKSON Diretoria Administrativa Financeira Almir Pereira dos Santos TV ALBA TVALBA'),"

@@ -71,24 +71,31 @@ class PropositionApi {
       pagHtml = "/atividade-legislativa/proposicoes?numero=$porNumero&palavra=&tipo=$porTipo&deputado=$porDep&exDeputado=&outros=$porExec&dataInicio=$dataIni&dataFim=$dataFim";
     }
 
-    //determina o numero de páginas resultante da buscada busca
+    //determina o numero de páginas resultante da busca
     if(await webScraperLiv.loadWebPage(pagHtml+"&page=0&size=20")){
       List<Map<String, dynamic>> numberOfPag =
       webScraperLiv.getElement('ul.pagination > li > a.paginate-button-next.fe-mobile-hide', ['href']);
 
-      var numPag = numberOfPag[0]['attributes'];
-      print("numero de página que vem no scraper ${numberOfPag[0]['attributes']}");
-      String pagina = (numPag.toString()).trim();
-      print("A informação trabalhada ${pagina}");
-      int c = pagina.length;
-      for(int i = 0; i < c-6; i++){
-          if(pagina.substring(i, i+6) == "&page="){
-            pg = pagina.substring(i+6, (pagina.length - 9));
+      print("O que volta da busca numero de pagina é: $numberOfPag");
+
+      if(numberOfPag.length > 0) {
+        var numPag = numberOfPag[0]['attributes'];
+        print(
+            "numero de página que vem no scraper ${numberOfPag[0]['attributes']}");
+        String pagina = (numPag.toString()).trim();
+        print("A informação trabalhada ${pagina}");
+        int c = pagina.length;
+        for (int i = 0; i < c - 6; i++) {
+          if (pagina.substring(i, i + 6) == "&page=") {
+            pg = pagina.substring(i + 6, (pagina.length - 9));
           }
-      }
-      max = int.parse(pg);
-      if(max > 4){
-        max = 4;
+        }
+        max = int.parse(pg);
+        if (max > 3) {
+          max = 3;
+        }
+      }else{
+        max = 0;
       }
     }
 
@@ -96,8 +103,7 @@ class PropositionApi {
 
     for(int pag = 0; pag <= max; pag++){
 
-      ProposicaoModel proposi = ProposicaoModel();
-
+    //int pag =0;
       print("o numero da pagina pesquisado é: ${pag}");
       String pagHtml2 = pagHtml+"&page=$pag&size=20";
       if(await webScraperLiv.loadWebPage(pagHtml2)){
@@ -125,6 +131,7 @@ class PropositionApi {
         if(elements1.length > 0){
 
           for(int i =0; i < elements2.length; i++) {
+            ProposicaoModel proposi = ProposicaoModel();
 
             var descr = elements2[i]["title"];
             String ement = (descr.toString()).trim();
@@ -143,8 +150,6 @@ class PropositionApi {
 
             proposiList.add(proposi);
           }
-        }else{
-          proposiList = null;
         }
       }
     }
