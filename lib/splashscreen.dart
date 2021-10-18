@@ -1,9 +1,11 @@
+import 'package:alba_app/helpers/bd_plunge.dart';
 import 'package:alba_app/main.dart';
 import 'package:alba_app/utils/livros_api_bd.dart';
 import 'package:alba_app/utils/news_api.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:sqflite/sqflite.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -38,6 +40,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     _connectivity.checkConnectivity().then((connectivityResult){
       _conectivityStatus(connectivityResult);
     });
+
     /*
     controleHelper.getControle().then((value){
       if(value != null){

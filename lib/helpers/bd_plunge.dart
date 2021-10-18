@@ -116,9 +116,9 @@ class BdPlunge {
   Future<Database> get dbAlba async {
     if (dbAlb != null) {
       _version = await dbAlb.getVersion();
-
-      if(_version <= 8 ){
-        dbAlb = await updateDb(dbAlb, _version, 9);
+      print("A versão do banco é: $_version");
+      if(_version <= 9 ){
+        dbAlb = await updateDb(dbAlb, _version, 10);
         return dbAlb;
       }else{
         return dbAlb;
@@ -135,7 +135,7 @@ class BdPlunge {
 
     List<String> listQueries = formQueries();
 
-    return await openDatabase(path, version: 9,
+    return await openDatabase(path, version: 10,
         onCreate: (Database db, int newerVersion) async {
           for (String query in listQueries) {
             await db.execute(query);
@@ -145,7 +145,9 @@ class BdPlunge {
 
   Future<Database> updateDb(Database db, int oldVersion, int newVersion) async {
     List<String> listQueriesAtualiz = formQueriesAtualiz();
+    print("disparou update");
 
+    await db.execute("DROP TABLE IF EXISTS $tabLivros;");
     await db.execute("DROP TABLE IF EXISTS $tabDep;");
     await db.execute("DROP TABLE IF EXISTS $tabComiss;");
     await db.execute("DROP TABLE IF EXISTS $tabMesadir;");
@@ -153,7 +155,7 @@ class BdPlunge {
     await db.execute("DROP TABLE IF EXISTS $tabPart;");
     await db.execute("DROP TABLE IF EXISTS $tabTodosDep;");
     await db.execute("DROP TABLE IF EXISTS $tabControle;");
-    await db.execute("DROP TABLE IF EXISTS $tabLivros;");
+
 
     for (int i = 0; i < listQueriesAtualiz.length; i++) {
       String queryAtualiz = listQueriesAtualiz[i];
